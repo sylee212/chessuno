@@ -2,10 +2,12 @@ package chessuno;
 
 import java.io.IOException;
 
+import chessuno.chessPieces.Pawn;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
@@ -17,13 +19,16 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 640, 480);
-        stage.setScene(scene);
+        //scene = new Scene(loadFXML("primary"), 640, 480);
+        //stage.setScene(scene);
 
-        for (Color elem : Color.values() ) {
-            System.out.println(elem);
-            
-        }
+        StackPane root = new StackPane();
+        Pawn pawn = new Pawn(Color.WHITE);
+        root.getChildren().add(pawn.getImageView());
+
+        Scene scene2 = new Scene(root, 640, 480);
+        stage.setScene(scene2);
+
         stage.show();
     }
 

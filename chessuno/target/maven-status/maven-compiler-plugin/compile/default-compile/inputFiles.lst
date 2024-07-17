@@ -1,6 +1,10 @@
 D:\Projects\chessuno\chessuno\src\main\java\module-info.java
 D:\Projects\chessuno\chessuno\src\main\java\chessuno\chessPieces\ChessPiece.java
 D:\Projects\chessuno\chessuno\src\main\java\chessuno\Color.java
+D:\Projects\chessuno\chessuno\src\main\java\chessuno\chessPieces\ChessPieceType.java
+D:\Projects\chessuno\chessuno\src\main\java\chessuno\chessPieces\Pawn.java
 D:\Projects\chessuno\chessuno\src\main\java\chessuno\PrimaryController.java
 D:\Projects\chessuno\chessuno\src\main\java\chessuno\SecondaryController.java
 D:\Projects\chessuno\chessuno\src\main\java\chessuno\App.java
+D:\Projects\chessuno\chessuno\src\main\java\chessuno\ImageManager.java
+D:\Projects\chessuno\chessuno\src\main\java\chessuno\SetClick.java
