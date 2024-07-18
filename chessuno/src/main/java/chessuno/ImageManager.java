@@ -15,6 +15,11 @@ public class ImageManager {
     public static double chessPiecefitWidth = 40.0;
     public static double chessPiecefitHeight = 40.0;
 
+    
+    // the size of the imageViews of the chess pieces, eg: Tiles
+    public static double tilefitWidth = 50.0;
+    public static double tilefitHeight = 50.0;
+
     // the singleton object of this class
     private static ImageManager imageManager = null;
 
@@ -29,6 +34,18 @@ public class ImageManager {
     }
 
     private ImageManager() {}
+
+    public Image getTileImage(Color color) {
+
+        // decides the color of the tile
+        if ( color == Color.GREY ){
+            String first = imageDirectory + "greyTile.png";
+            return new Image(getClass().getResource(first).toString());
+        } else {
+            String second = imageDirectory + "blueTile.png";
+            return new Image(getClass().getResource(second).toString());
+        }
+    }
 
     public Image getKingImage(Color color) {
         

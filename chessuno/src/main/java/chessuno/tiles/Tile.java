@@ -2,10 +2,13 @@ package chessuno.tiles;
 
 import chessuno.ClickType;
 import chessuno.Color;
+import chessuno.GetClickType;
+import chessuno.ImageManager;
+import chessuno.SetClick;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class Tile {
+public class Tile implements SetClick,GetClickType {
 
     // stores the tile number
     private int tileNumberVertical;
@@ -31,5 +34,147 @@ public class Tile {
     // the ImageView associated to this piece
     private ImageView imageView;
 
+    public Tile(Color color, int tileNumberVertical, int tileNumberHorizontal) {
+        setTileNumberVertical(tileNumberVertical);
+        setTileNumberHorizontal(tileNumberHorizontal);
+        setColor(color);
+        setClick(false);
+        setClickType(clickType.TILE);
+        setUIXcoordinate(0);
+        setUIYcoordinate(0);
+
+        setImage(ImageManager.getInstance().getTileImage(color));
+
+        // set the imageView
+        setImageView(new ImageView(getImage()));
+
+        // set the height and width
+        getImageView().setFitHeight(ImageManager.tilefitHeight);
+        getImageView().setFitWidth(ImageManager.tilefitWidth);
+    }
+    
+
+
+
+    /**
+     * @return int return the tileNumberVertical
+     */
+    public int getTileNumberVertical() {
+        return tileNumberVertical;
+    }
+
+    /**
+     * @param tileNumberVertical the tileNumberVertical to set
+     */
+    public void setTileNumberVertical(int tileNumberVertical) {
+        this.tileNumberVertical = tileNumberVertical;
+    }
+
+    /**
+     * @return int return the tileNumberHorizontal
+     */
+    public int getTileNumberHorizontal() {
+        return tileNumberHorizontal;
+    }
+
+    /**
+     * @param tileNumberHorizontal the tileNumberHorizontal to set
+     */
+    public void setTileNumberHorizontal(int tileNumberHorizontal) {
+        this.tileNumberHorizontal = tileNumberHorizontal;
+    }
+
+    /**
+     * @return Color return the color
+     */
+    public Color getColor() {
+        return color;
+    }
+
+    /**
+     * @param color the color to set
+     */
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    /**
+     * @return float return the UIXcoordinate
+     */
+    public float getUIXcoordinate() {
+        return UIXcoordinate;
+    }
+
+    /**
+     * @param UIXcoordinate the UIXcoordinate to set
+     */
+    public void setUIXcoordinate(float UIXcoordinate) {
+        this.UIXcoordinate = UIXcoordinate;
+    }
+
+    /**
+     * @return float return the UIYcoordinate
+     */
+    public float getUIYcoordinate() {
+        return UIYcoordinate;
+    }
+
+    /**
+     * @param UIYcoordinate the UIYcoordinate to set
+     */
+    public void setUIYcoordinate(float UIYcoordinate) {
+        this.UIYcoordinate = UIYcoordinate;
+    }
+
+    /**
+     * @return Image return the image
+     */
+    public Image getImage() {
+        return image;
+    }
+
+    /**
+     * @param image the image to set
+     */
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    /**
+     * @return ImageView return the imageView
+     */
+    public ImageView getImageView() {
+        return imageView;
+    }
+
+    /**
+     * @param imageView the imageView to set
+     */
+    public void setImageView(ImageView imageView) {
+        this.imageView = imageView;
+    }
+
+    /**
+     * @param isClicked the isClicked to set
+     */
+    @Override
+    public void setClick(boolean isClicked) {
+        this.isClick = isClicked;
+    }
+
+    @Override
+    public boolean getClick(){
+        return isClick;
+    }
+
+    @Override
+    public void setClickType(ClickType clickType) {
+        this.clickType = clickType;
+    }
+
+    @Override
+    public ClickType getClickType() {
+        return clickType;
+    }
 
 }

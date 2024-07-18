@@ -41,9 +41,9 @@ public abstract class ChessPiece implements SetClick, GetClickType{
         setChessPieceType(chessPieceType);
         setColor(color);
         setClick(false);
+        setClickType(clickType.CHESSPIECE);
         setUIXcoordinate(0);
         setUIYcoordinate(0);
-        setClickType(clickType.CHESSPIECE);
     }
 
     /**
@@ -72,13 +72,6 @@ public abstract class ChessPiece implements SetClick, GetClickType{
      */
     public void setColor(Color color) {
         this.color = color;
-    }
-
-    /**
-     * @return boolean return the isClicked
-     */
-    public boolean isClick() {
-        return isClick;
     }
 
     /**
@@ -151,10 +144,12 @@ public abstract class ChessPiece implements SetClick, GetClickType{
         this.imageView = imageView;
     }
 
+    @Override
     public void setClickType(ClickType clickType) {
         this.clickType = clickType;
     }
 
+    @Override
     public ClickType getClickType() {
         return clickType;
     }
