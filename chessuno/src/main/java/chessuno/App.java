@@ -10,6 +10,12 @@ import javafx.stage.Stage;
 
 /**
  * JavaFX App
+ * To rename a file, 
+ * 1) go to the class
+ * 2) right click the class name, 
+ * 3) rename symbol, to rename all occurences
+ * 4) rename the class in the file explorer not the java projects
+ * 5) if you see 2 files in the java projects, its a bug, just reset your vsc
  */
 public class App extends Application {
 

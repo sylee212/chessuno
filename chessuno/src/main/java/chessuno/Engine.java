@@ -2,12 +2,9 @@ package chessuno;
 
 import java.io.IOException;
 
-import chessuno.chessPieces.Pawn;
-import chessuno.tiles.Tile;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
@@ -17,6 +14,12 @@ public class Engine {
 
     // the singleton engine instance 
     private static Engine instance;
+
+    // the stage
+    private Stage stage;
+
+    // start scene change
+    private boolean isStartSceneChange = false;
 
     public static Engine getInstance() {
 
@@ -45,7 +48,10 @@ public class Engine {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/chessuno/game.fxml"));
             4) load the fxml
                 Pane root = loader.load();
-            5) for load the fxml, not sure if needed. cause we wiill use something else later which is the var from the controller class
+            5) for load the fxml, although it is not used, need to load it. So what you can do is, 
+                this -> loader.load();
+                instead of 
+                this -> Pane root = loader.getController();
             6) get the controller 
                 GameController controller = loader.getController();
             7) access the variable, for this case, cause the variable is private, need to use a function
@@ -53,29 +59,58 @@ public class Engine {
 
          */
 
+        // assign the stage
+        this.stage = stage;
         
-        // Load the FXML file
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/chessuno/game.fxml"));
-        Pane root = loader.load();
+        startScene();
 
-        GameController gameController = loader.getController();
+    }
 
-        AnchorPane gameControllerAnchorPane = gameController.getGameAnchorPane();
-
-        // Create Tile and Pawn
-        Tile piece = new Tile(Color.WHITE, 0, 0);
-        Pawn pawn = new Pawn(Color.WHITE);
-
-        // Add Tile and Pawn to the layout (assuming Pane is the root layout)
-        gameControllerAnchorPane.getChildren().addAll(piece.getImageView(), pawn.getImageView());
+    /**
+     * Function to load the main scene for the game
+     * 
+     * @param stage
+     * @throws IOException
+     */
+    private void startScene() throws IOException {
  
+        // Load the FXML file
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/chessuno/start.fxml"));
+        loader.load();
+
+        // get the controller. COMPULSORY
+        StartController startController = loader.getController();
+
+        // access the variable
+        AnchorPane startControllerAnchorPane = startController.getStartAnchorPane();
+
         // Create and set the scene
-        Scene scene = new Scene(gameControllerAnchorPane, 640, 480);
+        Scene scene = new Scene(startControllerAnchorPane, 640, 480);
         stage.setScene(scene);
 
         // Show the stage
         stage.show();
 
+    }
+
+    /**
+     * This function still exist because the change must inform the engine so that the engine can tell the state manager
+     * @param b
+     */
+    public boolean getIsStartSceneChange() {
+        return isStartSceneChange;    
+    }
+
+    public void setIsStartSceneChange(boolean b) {
+        isStartSceneChange = b;
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }
 /*
