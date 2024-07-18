@@ -4,14 +4,12 @@ import chessuno.Color;
 import chessuno.ImageManager;
 import javafx.scene.image.ImageView;
 
-public class Pawn extends ChessPiece {
-    
-    public Pawn(Color color) {
-        super(ChessPieceType.PAWN, color);
+public class Rook extends ChessPiece {
 
-        // set the image
-        //setImage( new Image(getClass().getResource("whitePawn.png").toString()) );
-        setImage(ImageManager.getInstance().getPawnImage(color));
+    public Rook(Color color) {
+        super(ChessPieceType.ROOK, color);
+
+        setImage(ImageManager.getInstance().getRookImage(color));
 
         // set the imageView
         setImageView(new ImageView(getImage()));
@@ -20,6 +18,5 @@ public class Pawn extends ChessPiece {
         getImageView().setFitHeight(ImageManager.chessPiecefitHeight);
         getImageView().setFitWidth(ImageManager.chessPiecefitWidth);
     }
-
 
 }

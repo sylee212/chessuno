@@ -1,11 +1,13 @@
 package chessuno.chessPieces;
 
+import chessuno.ClickType;
 import chessuno.Color;
+import chessuno.GetClickType;
 import chessuno.SetClick;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public abstract class ChessPiece implements SetClick{
+public abstract class ChessPiece implements SetClick, GetClickType{
 
     // the chess piece type
     private ChessPieceType chessPieceType;
@@ -16,6 +18,9 @@ public abstract class ChessPiece implements SetClick{
     // if this piece is clicked
     // used for condition checking
     protected boolean isClick;
+
+    // this is used for condition checking for the 3 main elements of the game
+    protected ClickType clickType;
 
     // the coordinates for the piece on the board
     private float UIXcoordinate;
@@ -38,6 +43,7 @@ public abstract class ChessPiece implements SetClick{
         setClick(false);
         setUIXcoordinate(0);
         setUIYcoordinate(0);
+        setClickType(clickType.CHESSPIECE);
     }
 
     /**
@@ -81,6 +87,11 @@ public abstract class ChessPiece implements SetClick{
     @Override
     public void setClick(boolean isClicked) {
         this.isClick = isClicked;
+    }
+
+    @Override
+    public boolean getClick(){
+        return isClick;
     }
 
     /**
@@ -138,6 +149,14 @@ public abstract class ChessPiece implements SetClick{
      */
     public void setImageView(ImageView imageView) {
         this.imageView = imageView;
+    }
+
+    public void setClickType(ClickType clickType) {
+        this.clickType = clickType;
+    }
+
+    public ClickType getClickType() {
+        return clickType;
     }
 
 }

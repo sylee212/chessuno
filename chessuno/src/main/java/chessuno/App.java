@@ -2,7 +2,7 @@ package chessuno;
 
 import java.io.IOException;
 
-import chessuno.chessPieces.Pawn;
+import chessuno.chessPieces.King;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,7 +23,7 @@ public class App extends Application {
         //stage.setScene(scene);
 
         StackPane root = new StackPane();
-        Pawn pawn = new Pawn(Color.WHITE);
+        King pawn = new King(Color.WHITE);
         root.getChildren().add(pawn.getImageView());
 
         Scene scene2 = new Scene(root, 640, 480);
