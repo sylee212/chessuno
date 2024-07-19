@@ -5,10 +5,14 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane fx:id="startAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chessuno.StartController">
    <children>
-      <Button fx:id="startStartButton" layoutX="241.0" layoutY="268.0" mnemonicParsing="false" onAction="#startStartButtonClicked" prefHeight="69.0" prefWidth="118.0" text="Start">
+      <Button fx:id="startNewGame" layoutX="177.0" layoutY="200.0" mnemonicParsing="false" onAction="#startNewGameClicked" prefHeight="69.0" prefWidth="247.0" text="New Game">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Button>
+      <Button fx:id="startLoadGame" layoutX="177.0" layoutY="284.0" mnemonicParsing="false" onAction="#startNewGameClicked" prefHeight="69.0" prefWidth="247.0" text="Load Game">
          <font>
             <Font size="31.0" />
          </font>

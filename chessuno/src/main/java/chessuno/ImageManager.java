@@ -27,8 +27,8 @@ public class ImageManager {
     private String imageDirectory = "/chessuno/Images/";
 
     public static ImageManager getInstance() {
-        if (imageManager == null) {
-            imageManager = new ImageManager();
+        if (ImageManager.imageManager == null) {
+            ImageManager.imageManager = new ImageManager();
         }
         return imageManager;
     }

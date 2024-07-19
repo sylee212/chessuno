@@ -17,13 +17,13 @@ public class StartController {
     private AnchorPane startAnchorPane;
     
     @FXML
-    private Button startStartButton;
+    private Button startNewGame;
     
     public AnchorPane getStartAnchorPane() {
         return startAnchorPane;
     }
     
-    public void startStartButtonClicked() throws IOException{
+    public void startNewGameClicked() throws IOException{
         System.out.println("start button clicked");
 
         // inform game Engine

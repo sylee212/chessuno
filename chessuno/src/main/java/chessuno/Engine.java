@@ -24,8 +24,8 @@ public class Engine {
     public static Engine getInstance() {
 
         // if the instance is null, create a new one
-        if (instance == null) {
-            instance = new Engine();
+        if (Engine.instance == null) {
+            Engine.instance = new Engine();
         }
         return instance;
 
