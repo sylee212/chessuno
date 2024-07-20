@@ -1,11 +1,14 @@
 package chessuno;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
+
 
 /**
  * Dictates everything, has all the instances of every controller class
@@ -16,10 +19,17 @@ public class Engine {
     private static Engine instance;
 
     // the stage
-    private Stage stage;
+    private static Stage stage;
 
     // start scene change
-    private boolean isStartSceneChange = false;
+    private static boolean isStartSceneChange;
+
+    // register scene change 
+    private static boolean isRegisterSceneChange;
+
+    // stores the values of the users screen and width
+    private double maxScreenWidth;
+    private double maxScreenHeight;
 
     public static Engine getInstance() {
 
@@ -34,13 +44,30 @@ public class Engine {
     /**
      * Blank constructor
      */
-    private Engine() {}
+    private Engine() {
+        Engine.isStartSceneChange = false;
+        Engine.isRegisterSceneChange = false;
+
+        // get the size of the screen
+        ArrayList<Double> screenSize = Engine.getScreenSize();
+        maxScreenWidth = screenSize.get(0);
+        maxScreenHeight = screenSize.get(1);
+    }
 
     public void startGame(Stage stage)  throws IOException {
 
-        /*
-         * To access the variables in the controller class
-         * 1) create the variable and make it the same name as the anchorPane in the controller class
+        // assign the stage
+        Engine.stage = stage;
+        
+        startScene();
+
+    }
+
+    /**
+     * Function to load the main scene for the game
+     * 
+     * To access the variables in the controller class
+            1) create the variable and make it the same name as the anchorPane in the controller class
                 @FXML
                 private AnchorPane GameAnchorPane;
             2) dosent have to be private, can be public, if public no need method to access it
@@ -56,18 +83,6 @@ public class Engine {
                 GameController controller = loader.getController();
             7) access the variable, for this case, cause the variable is private, need to use a function
                 AnchorPane gameControllerAnchorPane = gameController.getGameAnchorPane();
-
-         */
-
-        // assign the stage
-        this.stage = stage;
-        
-        startScene();
-
-    }
-
-    /**
-     * Function to load the main scene for the game
      * 
      * @param stage
      * @throws IOException
@@ -85,7 +100,7 @@ public class Engine {
         AnchorPane startControllerAnchorPane = startController.getStartAnchorPane();
 
         // Create and set the scene
-        Scene scene = new Scene(startControllerAnchorPane, 640, 480);
+        Scene scene = new Scene(startControllerAnchorPane, maxScreenWidth, maxScreenHeight);
         stage.setScene(scene);
 
         // Show the stage
@@ -98,11 +113,11 @@ public class Engine {
      * @param b
      */
     public boolean getIsStartSceneChange() {
-        return isStartSceneChange;    
+        return Engine.isStartSceneChange;    
     }
 
     public void setIsStartSceneChange(boolean b) {
-        isStartSceneChange = b;
+        Engine.isStartSceneChange = b;
     }
 
     public Stage getStage() {
@@ -112,6 +127,40 @@ public class Engine {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
+
+    public void setIsRegisterSceneChange(boolean b) {
+        Engine.isRegisterSceneChange = b;
+    }
+
+    public boolean getIsRegisterSceneChange() {
+        return Engine.isRegisterSceneChange;
+    }
+
+    /**
+     * Gets the visual screen size that does not include the toolbars
+     * @return ArrayList of the screen size in the format of [ screenWidth, screenHeight ]
+     */
+    public static ArrayList<Double> getScreenSize(){
+        // Get the primary screen
+        Screen primaryScreen = Screen.getPrimary();
+
+        // Get the visual bounds of the primary screen
+        javafx.geometry.Rectangle2D bounds = primaryScreen.getVisualBounds();
+        
+        double screenWidthLocal = bounds.getWidth();
+
+        // -20 because the height it gives us pushes the button above the screen
+        double screenHeightLocal = bounds.getHeight() - 20;
+
+        ArrayList<Double> screenSize = new ArrayList<>();
+
+        screenSize.add(screenWidthLocal);
+        screenSize.add(screenHeightLocal);
+
+        return screenSize;
+
+    }
+
 }
 /*
  *        

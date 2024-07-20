@@ -1,14 +1,14 @@
 package chessuno;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-import chessuno.chessPieces.Pawn;
-import chessuno.tiles.Tile;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class StartController {
@@ -17,13 +17,35 @@ public class StartController {
     private AnchorPane startAnchorPane;
     
     @FXML
-    private Button startNewGame;
+    private Button startNewGameButton;
+
+    @FXML
+    private Button startLoadGameButton;
+
+    
+    // stores the values of the users screen and width
+    private double maxScreenWidth;
+    private double maxScreenHeight;
     
     public AnchorPane getStartAnchorPane() {
         return startAnchorPane;
     }
+
+    /**
+     * This is the function that is called when the scene is first loaded
+     */
+    @FXML
+    private void initialize(){
+
+        // store the size
+        ArrayList<Double> screenSize = Engine.getScreenSize();
+        maxScreenWidth = screenSize.get(0);
+        maxScreenHeight = screenSize.get(1);
+
+        setScreenContentPositions();
+    }
     
-    public void startNewGameClicked() throws IOException{
+    public void startNewGameButtonClicked() throws IOException{
         System.out.println("start button clicked");
 
         // inform game Engine
@@ -33,29 +55,35 @@ public class StartController {
         Stage stage = Engine.getInstance().getStage();
 
         // get the fxml. COMPULSORY
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/chessuno/game.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/chessuno/register.fxml"));
 
         // load the FXML. COMPULSORY
-        loader.load();
+        Pane root =loader.load();
 
-        // get the controller. COMPULSORY
-        GameController gameController = loader.getController();
-
-        // access the variable
-        AnchorPane gameControllerAnchorPane = gameController.getGameAnchorPane();
-
-        // Create Tile and Pawn
-        Tile piece = new Tile(Color.WHITE, 0, 0);
-        Pawn pawn = new Pawn(Color.WHITE);
-
-        // Add Tile and Pawn to the layout (assuming Pane is the root layout)
-        gameControllerAnchorPane.getChildren().addAll(piece.getImageView(), pawn.getImageView());
- 
         // Create and set the scene
-        Scene scene = new Scene(gameControllerAnchorPane, 640, 480);
+        Scene scene = new Scene(root, maxScreenWidth, maxScreenHeight);
         stage.setScene(scene);
 
         // Show the stage
         stage.show();
+    }
+
+    private void setScreenContentPositions(){
+        
+        // calculate x and y positions
+        double x = maxScreenWidth / 2;
+        double y = maxScreenHeight / 2; 
+
+        // set the positions
+        startNewGameButton.setLayoutX(x);
+        startNewGameButton.setLayoutY(y);
+
+
+        // set the positions
+        y += 100;
+        System.out.println("y = " + y);
+        System.out.println("x = " + x);
+        startLoadGameButton.setLayoutX(x);
+        startLoadGameButton.setLayoutY(y);
     }
 }
