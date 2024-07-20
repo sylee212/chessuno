@@ -1,5 +1,6 @@
 package chessuno.chessPieces;
 
+import chessuno.ChessLocation;
 import chessuno.ClickType;
 import chessuno.Color;
 import chessuno.GetClickType;
@@ -21,6 +22,8 @@ public abstract class ChessPiece implements SetClick, GetClickType{
 
     // this is used for condition checking for the 3 main elements of the game
     protected ClickType clickType;
+
+    protected ChessLocation chessLocation;
 
     // the coordinates for the piece on the board
     private float UIXcoordinate;
@@ -152,6 +155,14 @@ public abstract class ChessPiece implements SetClick, GetClickType{
     @Override
     public ClickType getClickType() {
         return clickType;
+    }
+
+    public void setChessLocation(ChessLocation chessLocation) {
+        this.chessLocation = chessLocation;
+    }
+
+    public ChessLocation getChessLocation() {
+        return chessLocation;
     }
 
 }
