@@ -3,9 +3,7 @@ package chessuno;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import chessuno.chessPieces.Pawn;
 import chessuno.player.PlayerManager;
-import chessuno.tiles.Tile;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,6 +12,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
 /**
@@ -63,9 +62,6 @@ public class RegisterController {
         maxScreenWidth = screenSize.get(0);
         maxScreenHeight = screenSize.get(1);
 
-        // set the screen contents based on the size of the screen
-        setScreenContentPositions();
-
         // set the scene
         setRegisterScene();
 
@@ -81,6 +77,9 @@ public class RegisterController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        // set the screen contents based on the size of the screen
+        setScreenContentPositions();
         
     }
 
@@ -184,8 +183,16 @@ public class RegisterController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/chessuno/game.fxml"));
 
         // load the FXML. COMPULSORY
-        loader.load();
+        Pane root = loader.load();
 
+        // Create and set the scene     
+        Scene scene = new Scene(root, maxScreenWidth, maxScreenHeight);
+        stage.setScene(scene);
+
+        // Show the stage
+        stage.show();
+
+        /* 
         // get the controller. COMPULSORY
         GameController gameController = loader.getController();
 
@@ -205,6 +212,7 @@ public class RegisterController {
 
         // Show the stage
         stage.show();
+        */
     }
 
     private void setScreenContentPositions(){

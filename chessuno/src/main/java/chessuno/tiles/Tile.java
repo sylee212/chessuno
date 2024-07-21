@@ -12,8 +12,8 @@ import javafx.scene.image.ImageView;
 public class Tile implements SetClick,GetClickType {
 
     // stores the tile number
-    private int tileNumberVertical;
-    private int tileNumberHorizontal;
+    private int tileColNumber;
+    private int tileRowNumber;
     
     // the color of this piece
     private Color color;
@@ -37,9 +37,14 @@ public class Tile implements SetClick,GetClickType {
     // the ImageView associated to this piece
     private ImageView imageView;
 
-    public Tile(Color color, int tileNumberVertical, int tileNumberHorizontal) {
-        setTileNumberVertical(tileNumberVertical);
-        setTileNumberHorizontal(tileNumberHorizontal);
+    public Tile(Color color, int tileColNumber, int tileRowNumber) {
+        // create the location
+        settileColNumber(tileColNumber);
+        settileRowNumber(tileRowNumber);
+
+        // set the location
+        chessLocation = new ChessLocation(tileColNumber, tileRowNumber);
+
         setColor(color);
         setClick(false);
         setClickType(clickType.TILE);
@@ -54,37 +59,54 @@ public class Tile implements SetClick,GetClickType {
         // set the height and width
         getImageView().setFitHeight(ImageManager.tilefitHeight);
         getImageView().setFitWidth(ImageManager.tilefitWidth);
+
+        // set the click action
+        setOnClick();
     }
     
+    private void setOnClick() {
+        getImageView().setOnMouseClicked(event -> {
+            toggleIsClick();
+            System.out.println("Tile clicked: " + gettileColNumber() + " " + gettileRowNumber());
+        });
+    }
+
+    private void toggleIsClick(){
+        if ( isClick ){
+            setClick(false);
+        } else {
+            setClick(true);
+        }
+    }
 
 
 
     /**
-     * @return int return the tileNumberVertical
+     * @return int return the tileColNumber
      */
-    public int getTileNumberVertical() {
-        return tileNumberVertical;
+    public int gettileColNumber() {
+        return tileColNumber;
     }
 
     /**
-     * @param tileNumberVertical the tileNumberVertical to set
+     * @param tileColNumber the tileColNumber to set
      */
-    public void setTileNumberVertical(int tileNumberVertical) {
-        this.tileNumberVertical = tileNumberVertical;
+    public void settileColNumber(int tileColNumber) {
+        this.tileColNumber = tileColNumber;
     }
 
     /**
-     * @return int return the tileNumberHorizontal
+     * @return int return the tileRowNumber
      */
-    public int getTileNumberHorizontal() {
-        return tileNumberHorizontal;
+    public int gettileRowNumber() {
+        return tileRowNumber;
     }
 
     /**
-     * @param tileNumberHorizontal the tileNumberHorizontal to set
+     * @param tileRowNumber the tileRowNumber to set
      */
-    public void setTileNumberHorizontal(int tileNumberHorizontal) {
-        this.tileNumberHorizontal = tileNumberHorizontal;
+    public void settileRowNumber(int tileRowNumber) {
+        this.tileRowNumber = tileRowNumber;
     }
 
     /**

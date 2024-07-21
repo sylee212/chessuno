@@ -6,7 +6,7 @@ public class ChessLocation {
     private int chessRowCoordinate;
     private int chessColumnCoordinate;
 
-    public ChessLocation(int chessRowCoordinate, int chessColumnCoordinate) {
+    public ChessLocation(int chessColumnCoordinate, int chessRowCoordinate) {
         
         setChessRowCoordinate(chessRowCoordinate);
         setChessColumnCoordinate(chessColumnCoordinate);

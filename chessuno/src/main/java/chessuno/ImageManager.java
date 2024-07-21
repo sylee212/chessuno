@@ -41,9 +41,12 @@ public class ImageManager {
         if ( color == Color.GREY ){
             String first = imageDirectory + "greyTile.png";
             return new Image(getClass().getResource(first).toString());
-        } else {
+        } else if ( color == Color.BLUE ) {
             String second = imageDirectory + "blueTile.png";
             return new Image(getClass().getResource(second).toString());
+        } else {
+            String error = imageDirectory + "errorTile.png";
+            return new Image(getClass().getResource(error).toString());
         }
     }
 
