@@ -35,6 +35,9 @@ public class Engine {
     // register scene change 
     private static boolean isRegisterSceneChange;
 
+    // game scene change, means change into the game scene
+    private static boolean isGameSceneChange;
+
     // stores the values of the users screen and width
     private double maxScreenWidth;
     private double maxScreenHeight;
@@ -152,6 +155,14 @@ public class Engine {
         return Engine.isRegisterSceneChange;
     }
 
+    public void setIsGameSceneChange(boolean b){
+        Engine.isGameSceneChange = b;
+    }
+
+    public boolean getIsGameSceneChange(){
+        return Engine.isGameSceneChange;
+    }
+
     /**
      * Gets the visual screen size that does not include the toolbars
      * @return ArrayList of the screen size in the format of [ screenWidth, screenHeight ]
@@ -176,6 +187,8 @@ public class Engine {
         return screenSize;
 
     }
+
+
 
 }
 /*
