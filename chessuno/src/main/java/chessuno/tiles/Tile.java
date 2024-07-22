@@ -6,15 +6,12 @@ import chessuno.Color;
 import chessuno.GetClickType;
 import chessuno.ImageManager;
 import chessuno.SetClick;
+import chessuno.player.Player;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Tile implements SetClick,GetClickType {
 
-    // stores the tile number
-    private int tileColNumber;
-    private int tileRowNumber;
-    
     // the color of this piece
     private Color color;
 
@@ -26,6 +23,11 @@ public class Tile implements SetClick,GetClickType {
     protected ClickType clickType;
 
     protected ChessLocation chessLocation;
+
+    // determines if the player is on, if its on who is it
+    protected Player playerOnTile;
+
+    protected boolean isPlayerOnTile;
 
     // the coordinates for the piece on the board
     private float UIXcoordinate;
@@ -39,9 +41,6 @@ public class Tile implements SetClick,GetClickType {
 
     public Tile(Color color, int tileColNumber, int tileRowNumber) {
         // create the location
-        settileColNumber(tileColNumber);
-        settileRowNumber(tileRowNumber);
-
         // set the location
         chessLocation = new ChessLocation(tileColNumber, tileRowNumber);
 
@@ -67,7 +66,7 @@ public class Tile implements SetClick,GetClickType {
     private void setOnClick() {
         getImageView().setOnMouseClicked(event -> {
             toggleIsClick();
-            System.out.println("Tile clicked: " + gettileColNumber() + " " + gettileRowNumber());
+            System.out.println("Tile clicked: " + getChessLocation().getChessColumnCoordinate() + " " +  getChessLocation().getChessRowCoordinate());
         });
     }
 
@@ -79,35 +78,6 @@ public class Tile implements SetClick,GetClickType {
         }
     }
 
-
-
-    /**
-     * @return int return the tileColNumber
-     */
-    public int gettileColNumber() {
-        return tileColNumber;
-    }
-
-    /**
-     * @param tileColNumber the tileColNumber to set
-     */
-    public void settileColNumber(int tileColNumber) {
-        this.tileColNumber = tileColNumber;
-    }
-
-    /**
-     * @return int return the tileRowNumber
-     */
-    public int gettileRowNumber() {
-        return tileRowNumber;
-    }
-
-    /**
-     * @param tileRowNumber the tileRowNumber to set
-     */
-    public void settileRowNumber(int tileRowNumber) {
-        this.tileRowNumber = tileRowNumber;
-    }
 
     /**
      * @return Color return the color
@@ -209,5 +179,7 @@ public class Tile implements SetClick,GetClickType {
     public ChessLocation getChessLocation() {
         return chessLocation;
     }
+
+    
 
 }

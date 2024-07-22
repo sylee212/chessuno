@@ -3,6 +3,7 @@ package chessuno;
 import java.util.ArrayList;
 
 import chessuno.tiles.Tile;
+import chessuno.tiles.TileManager;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -115,6 +116,7 @@ public class GameController {
         System.out.println("GridPane width: " + getChessBoardGridPaneWidth());
         System.out.println("GridPane height: " + getChessBoardGridPaneHeight());
 
+        // the y coordinate might need to change
         double gridPaneX = 100;
         double gridPaneY = y;
 
@@ -125,37 +127,27 @@ public class GameController {
     }
 
     private void setChessBoardTiles(){
+
+        // get the list of tiles
+        ArrayList<Tile> tileList = TileManager.getInstance().getTileList();
         
-        // wil be used to create the tiles and determine what color to add now
-        Color tempColor;
+        // get the number of tiles
+        int numberOfTiles = tileList.size();
 
         // for row
-        for ( int row = 0; row < 8; row++ ){
+        for ( int tileNumber = 0; tileNumber < numberOfTiles; tileNumber++ ){
 
-            // for column
-            for ( int col = 0; col < 8; col++ ){
-
-                // change the color
-                if ( row % 2 == 0 ){
-                    if ( col % 2 == 0 ){
-                        tempColor = Color.GREY;
-                    }else{
-                        tempColor = Color.BLUE;
-                    }
-                }else{
-                    if ( col % 2 == 0 ){
-                        tempColor = Color.BLUE;
-                    }else{
-                        tempColor = Color.GREY;
-                    }
-                }
-
-                // create the tile
-                Tile tile = new Tile(tempColor, col, row);
-                chessBoardGridPane.add(tile.getImageView(), col, row);
-            }
-
+            // get the tile
+            Tile tile = tileList.get(tileNumber);
+            // get the column
+            int col = tile.getChessLocation().getChessColumnCoordinate();
+            // get the row
+            int row = tile.getChessLocation().getChessRowCoordinate();
+            
+            chessBoardGridPane.add(tile.getImageView(), col, row);
         }
+
+
     }
 
 
