@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import chessuno.chessPieces.ChessPieceManager;
+import chessuno.tiles.TileManager;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -24,6 +25,9 @@ public class Engine {
 
     // chessPieceManager
     private ChessPieceManager chessPieceManager;
+
+    // tileManager
+    private TileManager tileManager;
 
     // start scene change
     private static boolean isStartSceneChange;
@@ -60,7 +64,10 @@ public class Engine {
         // instantiate the singletons
         this.chessPieceManager = ChessPieceManager.getInstance();
 
-        System.out.println(this.chessPieceManager.getBlackChessPieceList());
+        this.tileManager = TileManager.getInstance();
+
+        
+
     }
 
     public void startGame(Stage stage)  throws IOException {
