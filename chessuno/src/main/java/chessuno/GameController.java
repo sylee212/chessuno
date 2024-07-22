@@ -2,6 +2,8 @@ package chessuno;
 
 import java.util.ArrayList;
 
+import chessuno.chessPieces.ChessPiece;
+import chessuno.chessPieces.ChessPieceManager;
 import chessuno.tiles.Tile;
 import chessuno.tiles.TileManager;
 import javafx.fxml.FXML;
@@ -88,6 +90,9 @@ public class GameController {
         // add in the tiles
         setChessBoardTiles();
 
+        // add in the chess pieces
+        setChessBoardPieces();
+
         // add to anchorpane
         GameAnchorPane.getChildren().add(getChessBoardGridPane());
 
@@ -151,6 +156,42 @@ public class GameController {
     }
 
 
+    public void setChessBoardPieces(){
+
+        // instantiate the chess pieces 
+        // get the list of chess pieces
+        ArrayList<ChessPiece> blackChessPieceList = ChessPieceManager.getInstance().getBlackChessPieceList();
+
+        ArrayList<ChessPiece> whiteChessPieceList = ChessPieceManager.getInstance().getWhiteChessPieceList();
+
+        int listMinSize = Math.min(blackChessPieceList.size(), whiteChessPieceList.size());
+
+
+        for ( int i = 0 ; i < listMinSize ; i++ ){
+        
+            // get the black chess piece
+            ChessPiece blackChessPiece = blackChessPieceList.get(i);    
+            
+            // get black chess piece location
+            int blackCol = blackChessPiece.getChessLocation().getChessColumnCoordinate();
+            int blackRow = blackChessPiece.getChessLocation().getChessRowCoordinate();
+
+            // add the black chess piece to the gridpane
+            chessBoardGridPane.add(blackChessPiece.getImageView(), blackCol, blackRow);
+
+            // get the white chess piece
+            ChessPiece whiteChessPiece = whiteChessPieceList.get(i);
+            
+            // get white chess piece location
+            int whiteCol = whiteChessPiece.getChessLocation().getChessColumnCoordinate();
+            int whiteRow = whiteChessPiece.getChessLocation().getChessRowCoordinate();
+
+            // get the white chess piece
+            chessBoardGridPane.add(whiteChessPiece.getImageView(), whiteCol, whiteRow);
+        }
+
+
+    }
 
 
 

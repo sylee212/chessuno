@@ -27,7 +27,7 @@ public class ChessPieceFactory {
 
         // instantiate the chess pieces
         // pawn
-        for ( int i = 0 ; i < 0 ; i++ ){
+        for ( int i = 0 ; i < 8 ; i++ ){
            // instantiate the Pawn
             Pawn pawn = new Pawn(color);  
 
