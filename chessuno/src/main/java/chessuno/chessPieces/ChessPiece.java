@@ -23,11 +23,8 @@ public abstract class ChessPiece implements SetClick, GetClickType{
     // this is used for condition checking for the 3 main elements of the game
     protected ClickType clickType;
 
+    // the location of this piece
     protected ChessLocation chessLocation;
-
-    // the coordinates for the piece on the board
-    private float UIXcoordinate;
-    private float UIYcoordinate;
 
     // the UI associated to this piece
     private Image image;
@@ -45,8 +42,7 @@ public abstract class ChessPiece implements SetClick, GetClickType{
         setColor(color);
         setClick(false);
         setClickType(clickType.CHESSPIECE);
-        setUIXcoordinate(0);
-        setUIYcoordinate(0);
+
     }
 
     /**
@@ -88,34 +84,6 @@ public abstract class ChessPiece implements SetClick, GetClickType{
     @Override
     public boolean getClick(){
         return isClick;
-    }
-
-    /**
-     * @return float return the UIXcoordinate
-     */
-    public float getUIXcoordinate() {
-        return UIXcoordinate;
-    }
-
-    /**
-     * @param UIXcoordinate the UIXcoordinate to set
-     */
-    public void setUIXcoordinate(float UIXcoordinate) {
-        this.UIXcoordinate = UIXcoordinate;
-    }
-
-    /**
-     * @return float return the UIYcoordinate
-     */
-    public float getUIYcoordinate() {
-        return UIYcoordinate;
-    }
-
-    /**
-     * @param UIYcoordinate the UIYcoordinate to set
-     */
-    public void setUIYcoordinate(float UIYcoordinate) {
-        this.UIYcoordinate = UIYcoordinate;
     }
 
     /**
@@ -163,6 +131,24 @@ public abstract class ChessPiece implements SetClick, GetClickType{
 
     public ChessLocation getChessLocation() {
         return chessLocation;
+    }
+
+    
+    private void toggleIsClick(){
+        if ( isClick ){
+            setClick(false);
+        } else {
+            setClick(true);
+        }
+    }
+
+    public void setOnCLick(){
+
+        toggleIsClick();
+
+        getImageView().setOnMouseClicked((mouseEvent) -> {
+            System.out.println("Piece clicked: " + getChessLocation().getChessColumnCoordinate() + " " +  getChessLocation().getChessRowCoordinate());
+        });
     }
 
 }

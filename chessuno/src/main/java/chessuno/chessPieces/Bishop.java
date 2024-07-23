@@ -17,6 +17,11 @@ public class Bishop extends ChessPiece {
         // set the height and width
         getImageView().setFitHeight(ImageManager.chessPiecefitHeight);
         getImageView().setFitWidth(ImageManager.chessPiecefitWidth);
+
+        // {POTENTIAL OPTIMIZATION}
+        // by putting it inside the parent class
+        // set the onClick
+        setOnCLick();
     }
 
 }
