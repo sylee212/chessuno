@@ -86,9 +86,6 @@ public class Card implements GetClickType{
         getBaseImageView().setTranslateX(0);
         getBaseImageView().setTranslateY(0);
 
-        System.out.println("middle point: " + CardFactory.getInstance().CARD_X_CENTER + ", " + CardFactory.getInstance().CARD_Y_CENTER);
-        System.out.println("number image view X: " + CardFactory.getInstance().NUMBER_IMAGEVIEW_X + ", Y: " + CardFactory.getInstance().NUMBER_IMAGEVIEW_Y);
-
     }
 
     
