@@ -11,7 +11,7 @@ public class Pawn extends ChessPiece {
 
         // set the image
         //setImage( new Image(getClass().getResource("whitePawn.png").toString()) );
-        setImage(ImageManager.getInstance().getPawnImage(color));
+        setImage(ImageManager.getInstance().getChessPieceImage(color, ChessPieceType.PAWN));
 
         // set the imageView
         setImageView(new ImageView(getImage()));

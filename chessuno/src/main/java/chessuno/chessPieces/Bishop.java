@@ -9,7 +9,7 @@ public class Bishop extends ChessPiece {
     public Bishop(Color color) {
         super(ChessPieceType.BISHOP, color);
 
-        setImage(ImageManager.getInstance().getBishopImage(color));
+        setImage(ImageManager.getInstance().getChessPieceImage(color, ChessPieceType.BISHOP));
 
         // set the imageView
         setImageView(new ImageView(getImage()));

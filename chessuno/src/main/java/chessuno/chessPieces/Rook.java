@@ -9,7 +9,7 @@ public class Rook extends ChessPiece {
     public Rook(Color color) {
         super(ChessPieceType.ROOK, color);
 
-        setImage(ImageManager.getInstance().getRookImage(color));
+        setImage(ImageManager.getInstance().getChessPieceImage(color, ChessPieceType.ROOK));
 
         // set the imageView
         setImageView(new ImageView(getImage()));

@@ -9,7 +9,7 @@ public class Knight extends ChessPiece {
     public Knight(Color color) {
         super(ChessPieceType.KNIGHT, color);
 
-        setImage(ImageManager.getInstance().getKnightImage(color));
+        setImage(ImageManager.getInstance().getChessPieceImage(color, ChessPieceType.KNIGHT));
 
         // set the imageView
         setImageView(new ImageView(getImage()));

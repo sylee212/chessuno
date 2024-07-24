@@ -111,7 +111,7 @@ public class ImageManager {
         }
     }
 
-    public Image getKingImage(Color color) {
+    private Image getKingImage(Color color) {
         
         // decides the color of the pawn
         if ( color == Color.WHITE ){
@@ -124,7 +124,7 @@ public class ImageManager {
         
     }
 
-    public Image getQueenImage(Color color) {
+    private Image getQueenImage(Color color) {
         
         // decides the color of the pawn
         if ( color == Color.WHITE ){
@@ -137,7 +137,7 @@ public class ImageManager {
         
     }
 
-    public Image getBishopImage(Color color) {
+    private Image getBishopImage(Color color) {
         
         // decides the color of the pawn
         if ( color == Color.WHITE ){
@@ -150,7 +150,7 @@ public class ImageManager {
         
     }
 
-    public Image getKnightImage(Color color) {
+    private Image getKnightImage(Color color) {
         
         // decides the color of the pawn
         if ( color == Color.WHITE ){
@@ -163,7 +163,7 @@ public class ImageManager {
         
     }
 
-    public Image getRookImage(Color color) {
+    private Image getRookImage(Color color) {
         
         // decides the color of the pawn
         if ( color == Color.WHITE ){
@@ -196,7 +196,7 @@ public class ImageManager {
      * @param color
      * @return
      */
-    public Image getPawnImage(Color color) {
+    private Image getPawnImage(Color color) {
         
         // decides the color of the pawn
         if ( color == Color.WHITE ){
