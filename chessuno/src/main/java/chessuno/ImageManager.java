@@ -1,5 +1,6 @@
 package chessuno;
 
+import chessuno.chessPieces.ChessPieceType;
 import javafx.scene.image.Image;
 
 /**
@@ -35,7 +36,58 @@ public class ImageManager {
 
     private ImageManager() {}
 
-    public Image getBlankColorBase(Color color) {
+    public Image getNumberImage(int number) {
+    
+        // returns an image based on the number
+        switch (number) {
+            case 0:
+                return new Image(getClass().getResource(imageDirectory + "numberZero.png").toString());
+            case 1:
+                return new Image(getClass().getResource(imageDirectory + "numberOne.png").toString());
+            case 2:
+                return new Image(getClass().getResource(imageDirectory + "numberTwo.png").toString());
+            case 3:
+                return new Image(getClass().getResource(imageDirectory + "numberThree.png").toString());
+            case 4:
+                return new Image(getClass().getResource(imageDirectory + "numberFour.png").toString());
+            case 5:
+                return new Image(getClass().getResource(imageDirectory + "numberFive.png").toString());
+            case 6:
+                return new Image(getClass().getResource(imageDirectory + "numberSix.png").toString());
+            case 7:
+                return new Image(getClass().getResource(imageDirectory + "numberSeven.png").toString());
+            case 8:
+                return new Image(getClass().getResource(imageDirectory + "numberEight.png").toString());
+            case 9:
+                return new Image(getClass().getResource(imageDirectory + "numberNine.png").toString());
+            default:
+                return new Image(getClass().getResource(imageDirectory + "errorTile.png").toString());
+        }
+    }
+
+    public Image getChessPieceImage(Color color, ChessPieceType chessPieceType) {
+        if ( null == chessPieceType ) {
+            return new Image(getClass().getResource(imageDirectory + "errorTile.png").toString());
+        } else switch (chessPieceType) {
+            case PAWN:
+                return getPawnImage(color);
+            case ROOK:
+                return getRookImage(color);
+            case BISHOP:
+                return getBishopImage(color);
+            case QUEEN:
+                return getQueenImage(color);
+            case KING:
+                return getKingImage(color);
+            case KNIGHT:
+                return getKnightImage(color);
+            default:
+                return new Image(getClass().getResource(imageDirectory + "errorTile.png").toString());
+        }
+        
+    }
+
+    public Image getBlankColorBaseImage(Color color) {
 
         // decides the color of the tile
         if ( color == Color.GREY ){

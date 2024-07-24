@@ -50,7 +50,7 @@ public class Tile implements SetClick,GetClickType {
         setUIXcoordinate(0);
         setUIYcoordinate(0);
 
-        setImage(ImageManager.getInstance().getBlankColorBase(color));
+        setImage(ImageManager.getInstance().getBlankColorBaseImage(color));
 
         // set the imageView
         setImageView(new ImageView(getImage()));
