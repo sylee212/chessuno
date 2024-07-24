@@ -98,6 +98,10 @@ public class CardFactory {
 
     }
 
+    public Card createSpecificCard(Color color, ChessPieceType chessPieceType, int number) {
+        return new Card(color, chessPieceType, number);
+    }
+
     private void setCardNumbers(){
         // set the possible numbers
         possibleNumbers = new ArrayList<>();
