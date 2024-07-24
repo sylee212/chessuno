@@ -3,6 +3,7 @@ package chessuno.cards;
 import chessuno.ClickType;
 import chessuno.Color;
 import chessuno.GetClickType;
+import chessuno.ImageManager;
 import chessuno.chessPieces.ChessPieceType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -31,8 +32,63 @@ public class Card implements GetClickType{
     // the StackPane that will hold the imageViews
     private StackPane cardStackPane;
 
-    public Card(){
-        
+
+
+    public Card(Color color, ChessPieceType chessPieceType, int number) {
+        // set the card data
+        setClickType(clickType.CARD);
+
+        setColor(color);
+        setChessPieceType(chessPieceType);
+        setNumber(number);
+
+        // set the images
+        setBaseImage( ImageManager.getInstance().getBlankColorBaseImage(color) );
+        setChessPieceImage( ImageManager.getInstance().getChessPieceImage(color, chessPieceType) );
+        setNumberImage( ImageManager.getInstance().getNumberImage(number) );
+
+        // set the imageViews
+        setBaseImageView( new ImageView(getBaseImage()) );
+        setChessPieceImageView( new ImageView(getChessPieceImage()) );
+        setNumberImageView( new ImageView(getNumberImage()) );
+
+        // set the StackPane
+        setCardStackPane( new StackPane(getBaseImageView(), getChessPieceImageView(), getNumberImageView()) );
+
+        // set the contents of the stackPane
+        setCardStackPaneContent();
+    }
+
+    private void setCardStackPaneContent(){
+        // set the dimensions of the StackPane
+        getCardStackPane().setPrefSize(CardFactory.getInstance().CARD_BASE_WIDTH , CardFactory.getInstance().CARD_BASE_WIDTH);
+
+        // set the dimensions for the contents
+        getChessPieceImageView().setFitHeight(CardFactory.getInstance().CHESS_PIECE_IMAGEVIEW_HEIGHT);
+        getChessPieceImageView().setFitWidth(CardFactory.getInstance().CHESS_PIECE_IMAGEVIEW_WIDTH);
+
+        getNumberImageView().setFitHeight(CardFactory.getInstance().NUMBER_IMAGEVIEW_HEIGHT);
+        getNumberImageView().setFitWidth(CardFactory.getInstance().CHESS_PIECE_IMAGEVIEW_WIDTH); 
+
+        getBaseImageView().setFitHeight(CardFactory.getInstance().CARD_BASE_HEIGHT);
+        getBaseImageView().setFitWidth(CardFactory.getInstance().CARD_BASE_WIDTH);
+
+        // set the coordinates 
+        getChessPieceImageView().setTranslateX(CardFactory.getInstance().CHESS_PIECE_IMAGEVIEW_X);
+        getChessPieceImageView().setTranslateY(CardFactory.getInstance().CHESS_PIECE_IMAGEVIEW_Y);
+
+        // set the coordinates
+        // the x and y coordinates are relative to the StackPane's center point, not the ImageView's top left corner
+        // so need to set (-) to put it to the left
+        getNumberImageView().setTranslateX(CardFactory.getInstance().NUMBER_IMAGEVIEW_X);
+        getNumberImageView().setTranslateY(CardFactory.getInstance().NUMBER_IMAGEVIEW_Y);
+
+        getBaseImageView().setTranslateX(0);
+        getBaseImageView().setTranslateY(0);
+
+        System.out.println("middle point: " + CardFactory.getInstance().CARD_X_CENTER + ", " + CardFactory.getInstance().CARD_Y_CENTER);
+        System.out.println("number image view X: " + CardFactory.getInstance().NUMBER_IMAGEVIEW_X + ", Y: " + CardFactory.getInstance().NUMBER_IMAGEVIEW_Y);
+
     }
 
     
@@ -146,6 +202,7 @@ public class Card implements GetClickType{
      */
     public void setBaseImageView(ImageView baseImageView) {
         this.baseImageView = baseImageView;
+        this.baseImageView.setPreserveRatio(false);
     }
 
     /**
@@ -160,6 +217,7 @@ public class Card implements GetClickType{
      */
     public void setChessPieceImageView(ImageView chessPieceImageView) {
         this.chessPieceImageView = chessPieceImageView;
+        this.chessPieceImageView.setPreserveRatio(false);
     }
 
     /**
@@ -174,6 +232,23 @@ public class Card implements GetClickType{
      */
     public void setNumberImageView(ImageView numberImageView) {
         this.numberImageView = numberImageView;
+        this.numberImageView.setPreserveRatio(false);
     }
+
+    /**
+     * @return StackPane return the cardStackPane
+     */
+    public StackPane getCardStackPane() {
+        return cardStackPane;
+    }
+
+    /**
+     * @param cardStackPane the cardStackPane to set
+     */
+    public void setCardStackPane(StackPane cardStackPane) {
+        this.cardStackPane = cardStackPane;
+    }
+
+
 
 }

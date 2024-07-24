@@ -2,8 +2,11 @@ package chessuno;
 
 import java.util.ArrayList;
 
+import chessuno.cards.Card;
+import chessuno.cards.CardFactory;
 import chessuno.chessPieces.ChessPiece;
 import chessuno.chessPieces.ChessPieceManager;
+import chessuno.chessPieces.ChessPieceType;
 import chessuno.tiles.Tile;
 import chessuno.tiles.TileManager;
 import javafx.fxml.FXML;
@@ -97,6 +100,10 @@ public class GameController {
         GameAnchorPane.getChildren().add(getChessBoardGridPane());
 
         setScreenContentPositions();
+
+        Card card = CardFactory.getInstance().createRandomCard();
+
+        GameAnchorPane.getChildren().add(card.getCardStackPane());
     }
 
     private void setScreenContentPositions(){
