@@ -167,6 +167,7 @@ public class GameController {
         int listMinSize = Math.min(blackChessPieceList.size(), whiteChessPieceList.size());
 
 
+        /////////// PENDING ////////////////////// need to add the pieces connection to the tiles
         for ( int i = 0 ; i < listMinSize ; i++ ){
         
             // get the black chess piece

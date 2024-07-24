@@ -35,15 +35,24 @@ public class ImageManager {
 
     private ImageManager() {}
 
-    public Image getTileImage(Color color) {
+    public Image getBlankColorBase(Color color) {
 
         // decides the color of the tile
         if ( color == Color.GREY ){
-            String first = imageDirectory + "greyTile.png";
-            return new Image(getClass().getResource(first).toString());
+            String wantedColor = imageDirectory + "greyTile.png";
+            return new Image(getClass().getResource(wantedColor).toString());
         } else if ( color == Color.BLUE ) {
-            String second = imageDirectory + "blueTile.png";
-            return new Image(getClass().getResource(second).toString());
+            String wantedColor = imageDirectory + "blueTile.png";
+            return new Image(getClass().getResource(wantedColor).toString());
+        } else if ( color == Color.RED ) {
+            String wantedColor = imageDirectory + "redCardBase.png";
+            return new Image(getClass().getResource(wantedColor).toString());
+        } else if ( color == Color.GREEN ) {
+            String wantedColor = imageDirectory + "greenCardBase.png";
+            return new Image(getClass().getResource(wantedColor).toString());
+        } else if ( color == Color.YELLOW ) {
+            String wantedColor = imageDirectory + "yellowCardBase.png";
+            return new Image(getClass().getResource(wantedColor).toString());
         } else {
             String error = imageDirectory + "errorTile.png";
             return new Image(getClass().getResource(error).toString());
