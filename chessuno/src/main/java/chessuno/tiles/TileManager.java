@@ -58,7 +58,7 @@ public class TileManager {
                 }
 
                 // create the tile
-                Tile tile = new Tile(tempColor, col, row);
+                Tile tile = TileFactory.getInstance().createTile(tempColor, col, row);
 
                 tileListTemp.add(tile);
             }

@@ -33,6 +33,7 @@ public class Tile implements SetClick,GetClickType {
     private float UIXcoordinate;
     private float UIYcoordinate;
 
+
     // the UI associated to this piece
     private Image image;
 
