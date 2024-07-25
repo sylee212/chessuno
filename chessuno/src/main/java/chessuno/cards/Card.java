@@ -57,6 +57,8 @@ public class Card implements GetClickType{
 
         // set the contents of the stackPane
         setCardStackPaneContent();
+
+        setCardStackPaneOnClick();
     }
 
     private void setCardStackPaneContent(){
@@ -86,6 +88,12 @@ public class Card implements GetClickType{
         getBaseImageView().setTranslateX(0);
         getBaseImageView().setTranslateY(0);
 
+    }
+
+    public void setCardStackPaneOnClick(){
+        getCardStackPane().setOnMouseClicked(event -> {
+            System.out.println("Card clicked");
+        });
     }
 
     
