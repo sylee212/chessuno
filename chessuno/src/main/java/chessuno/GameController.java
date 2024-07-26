@@ -11,6 +11,7 @@ import chessuno.tiles.Tile;
 import chessuno.tiles.TileManager;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
 public class GameController {
@@ -28,6 +29,9 @@ public class GameController {
     // stores the gridpane width and height
     private double chessBoardGridPaneWidth;
     private double chessBoardGridPaneHeight;
+
+    // creates the card BorderPane 
+    private BorderPane cardBorderPane;
 
     public AnchorPane getGameAnchorPane() {
         return GameAnchorPane;
@@ -96,6 +100,14 @@ public class GameController {
         // add in the chess pieces
         setChessBoardPieces();
 
+        // set the card contents 
+        BorderPane cardBorderPaneTemp = new BorderPane();
+
+        // set the BorderPane to the instance variable
+        setCardBorderPane(cardBorderPaneTemp);
+
+        setCards();
+
         // add to anchorpane
         GameAnchorPane.getChildren().add(getChessBoardGridPane());
 
@@ -139,25 +151,36 @@ public class GameController {
 
     }
 
+    private void setCards(){
+        
+    }
+
     private void setChessBoardTiles(){
 
         // get the list of tiles
-        ArrayList<Tile> tileList = TileManager.getInstance().getTileList();
+        ArrayList<ArrayList<Tile>> tileList = TileManager.getInstance().getTileListGridForm();
         
         // get the number of tiles
-        int numberOfTiles = tileList.size();
+        int numberOfTilesPerRow = tileList.size();
 
         // for row
-        for ( int tileNumber = 0; tileNumber < numberOfTiles; tileNumber++ ){
+        for ( int tileRow = 0; tileRow < numberOfTilesPerRow; tileRow++ ){
 
-            // get the tile
-            Tile tile = tileList.get(tileNumber);
-            // get the column
-            int col = tile.getChessLocation().getChessColumnCoordinate();
-            // get the row
-            int row = tile.getChessLocation().getChessRowCoordinate();
-            
-            chessBoardGridPane.add(tile.getImageView(), col, row);
+            int numberOfTilesPerColumn = tileList.get(tileRow).size();
+
+            ArrayList<Tile> currentTileList = tileList.get(tileRow);
+
+            for ( int tileColumn = 0 ; tileColumn < numberOfTilesPerColumn ; tileColumn++ ){
+
+                // get the tile
+                Tile tile = currentTileList.get(tileColumn);
+                // get the column
+                int col = tile.getChessLocation().getChessColumnCoordinate();
+                // get the row
+                int row = tile.getChessLocation().getChessRowCoordinate();
+                
+                chessBoardGridPane.add(tile.getImageView(), col, row);
+            }
         }
 
 
@@ -232,6 +255,21 @@ public class GameController {
      */
     public void setChessBoardGridPaneHeight(double chessBoardGridPaneHeight) {
         this.chessBoardGridPaneHeight = chessBoardGridPaneHeight;
+    }
+
+
+    /**
+     * @return BorderPane return the cardBorderPane
+     */
+    public BorderPane getCardBorderPane() {
+        return cardBorderPane;
+    }
+
+    /**
+     * @param cardBorderPane the cardBorderPane to set
+     */
+    public void setCardBorderPane(BorderPane cardBorderPane) {
+        this.cardBorderPane = cardBorderPane;
     }
 
 }
