@@ -2,13 +2,10 @@ package chessuno;
 
 import java.util.ArrayList;
 
-import chessuno.cards.Card;
-import chessuno.cards.CardFactory;
-import chessuno.chessPieces.ChessPieceType;
-import chessuno.uiContainer.ChessBoard;
+import chessuno.uiContainer.CardContainer;
+import chessuno.uiContainer.ChessBoardContainer;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
 public class GameController {
@@ -21,15 +18,16 @@ public class GameController {
     private double maxScreenHeight;
 
     // chess variables // 
-    private ChessBoard chessBoard;
+    private ChessBoardContainer chessBoard;
 
     // the chess board grid pane where all the pieces will be in 
     private GridPane chessBoardGridPane;
 
     // card variables //
+    private CardContainer cardContainer;
 
-    // creates the card BorderPane 
-    private BorderPane cardBorderPane;
+    // creates the card AnchorPane 
+    private AnchorPane cardAnchorPane;
 
     
 
@@ -46,28 +44,31 @@ public class GameController {
 
         // set the chess contents // 
         // get the singleton for the chess board ui 
-        chessBoard = ChessBoard.getInstance();
+        chessBoard = ChessBoardContainer.getInstance();
 
         // assign the GridPane to the instance variable
         setChessBoardGridPane(chessBoard.getChessBoardGridPane());
 
-        // set the card contents // 
-        BorderPane cardBorderPaneTemp = new BorderPane();
-
-        // set the BorderPane to the instance variable
-        setCardBorderPane(cardBorderPaneTemp);
-
-        setCards();
-
         // add to anchorpane
         GameAnchorPane.getChildren().add(getChessBoardGridPane());
+
+        // set the card contents // 
+        // get the singleton for the card ui
+        cardContainer = CardContainer.getInstance();
+
+        // set the AnchorPane to the instance variable
+        setCardAnchorPane(cardContainer.getCardContainerAnchorPane());
+
+        // add to anchorpane
+        GameAnchorPane.getChildren().add(getCardAnchorPane());
+
 
         setScreenContentPositions();
 
         // used for testing
-        Card card = CardFactory.getInstance().createSpecificCard(Color.RED, ChessPieceType.BISHOP, 9);
+        // Card card = CardFactory.getInstance().createSpecificCard(Color.RED, ChessPieceType.BISHOP, 9);
 
-        GameAnchorPane.getChildren().add(card.getCardStackPane());
+        // GameAnchorPane.getChildren().add(card.getCardStackPane());
     }
 
     private void setScreenContentPositions(){
@@ -107,15 +108,15 @@ public class GameController {
     /**
      * @return BorderPane return the cardBorderPane
      */
-    public BorderPane getCardBorderPane() {
-        return cardBorderPane;
+    public AnchorPane getCardAnchorPane() {
+        return cardAnchorPane;
     }
 
     /**
      * @param cardBorderPane the cardBorderPane to set
      */
-    public void setCardBorderPane(BorderPane cardBorderPane) {
-        this.cardBorderPane = cardBorderPane;
+    public void setCardAnchorPane(AnchorPane cardBorderPane) {
+        this.cardAnchorPane = cardBorderPane;
     }
 
     public AnchorPane getGameAnchorPane() {

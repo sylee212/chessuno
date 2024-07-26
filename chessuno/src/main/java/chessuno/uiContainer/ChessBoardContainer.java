@@ -8,9 +8,9 @@ import chessuno.tiles.Tile;
 import chessuno.tiles.TileManager;
 import javafx.scene.layout.GridPane;
 
-public class ChessBoard {
+public class ChessBoardContainer {
 
-    private static ChessBoard chessBoard;
+    private static ChessBoardContainer chessBoard;
 
     // the chess board grid pane where all the pieces will be in 
     private GridPane chessBoardGridPane;
@@ -19,7 +19,7 @@ public class ChessBoard {
     private double chessBoardGridPaneWidth;
     private double chessBoardGridPaneHeight;
 
-    private ChessBoard(){
+    private ChessBoardContainer(){
 
         // create the GridPane
         GridPane chessBoardGridPaneTemp = new GridPane();
@@ -35,12 +35,12 @@ public class ChessBoard {
 
     }
 
-    public static ChessBoard getInstance(){
+    public static ChessBoardContainer getInstance(){
 
-        if(ChessBoard.chessBoard == null){
-            ChessBoard.chessBoard = new ChessBoard();
+        if(ChessBoardContainer.chessBoard == null){
+            ChessBoardContainer.chessBoard = new ChessBoardContainer();
         }
-        return ChessBoard.chessBoard;
+        return ChessBoardContainer.chessBoard;
     }
 
     private void setChessBoardTiles(){

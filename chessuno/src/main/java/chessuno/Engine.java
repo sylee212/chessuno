@@ -3,8 +3,12 @@ package chessuno;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import chessuno.cards.Card;
+import chessuno.cards.CardManager;
 import chessuno.chessPieces.ChessPiece;
 import chessuno.chessPieces.ChessPieceManager;
+import chessuno.player.Player;
+import chessuno.player.PlayerManager;
 import chessuno.tiles.Tile;
 import chessuno.tiles.TileManager;
 import javafx.fxml.FXMLLoader;
@@ -30,6 +34,9 @@ public class Engine {
 
     // tileManager
     private TileManager tileManager;
+
+    // cardManager
+    private CardManager cardManager;
 
     // start scene change
     private static boolean isStartSceneChange;
@@ -72,11 +79,13 @@ public class Engine {
         // instantiate the singletons
         this.tileManager = TileManager.getInstance();
 
+        // set the players to be connected to the chess pieces and cards
+        this.cardManager = CardManager.getInstance();
 
         // unite the chess pieces and the tiles
         setChessPieceAndTile();
         
-
+        // the player cards are created after the players are created
     }
 
     public void startGame(Stage stage)  throws IOException {
@@ -130,6 +139,29 @@ public class Engine {
 
         // Show the stage
         stage.show();
+
+    }
+
+    private void setPlayerCards(){
+        // get the players list
+        ArrayList<Player> players = PlayerManager.getInstance().getPlayers();
+
+        // for every player
+        for ( int i = 0 ; i < players.size() ; i++ ) {
+
+            // get the player
+            Player player = players.get(i);
+
+            // get the color
+            Color color = player.getColor();
+
+            // create the cards 
+            ArrayList<Card> cards = cardManager.initializeCards(color);
+
+            // assign the cards to the player
+            player.setCards(cards);
+
+        }
 
     }
 
@@ -200,6 +232,14 @@ public class Engine {
     }
 
     public void setIsRegisterSceneChange(boolean b) {
+
+        // cause the players are only created after this is called, 
+        // set the players cards //
+        // required because need to create the cards 
+        setPlayerCards();
+
+        System.out.println("engine informed");
+
         Engine.isRegisterSceneChange = b;
     }
 

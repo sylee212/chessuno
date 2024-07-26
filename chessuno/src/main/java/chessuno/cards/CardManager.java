@@ -1,12 +1,24 @@
 package chessuno.cards;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import chessuno.Color;
+
 public class CardManager {
 
     private static CardManager cardManager;
 
     public static final int MAX_NUMBER_OF_CARDS_PER_PLAYER = 8;
 
+    private HashMap< Color , ArrayList<Card> > playerCards;
+
+    
+
     private CardManager() {
+
+        // initialize the hashmap
+        playerCards = new HashMap<>();
     }   
 
     public static CardManager getInstance() {
@@ -16,6 +28,50 @@ public class CardManager {
         return CardManager.cardManager;
     }
 
+    public ArrayList<Card> initializeCards(Color color) {
+
+        // create the cards list
+        ArrayList<Card> cardsList = new ArrayList<>();
+
+        // get the card factory 
+        CardFactory cardFactory = CardFactory.getInstance();
+
+        // for each card, create a card and add it to the list
+        for (int i = 0; i < MAX_NUMBER_OF_CARDS_PER_PLAYER; i++) {
+            cardsList.add(cardFactory.createRandomCard());
+        }
+
+        // add the cards to the list
+        putPlayerCards(color, cardsList);
+
+        System.out.println("this is the list of player cards: " + CardManager.getInstance().getPlayerCards());
+
+        return cardsList;
+    }
+
     
+
+
+    /**
+     * @return ArrayList<ArrayList<Card>> return the playerCards
+     */
+    public HashMap< Color , ArrayList<Card> > getPlayerCards() {
+        return playerCards;
+    }
+
+    /**
+     * @param playerCards the playerCards to set
+     */
+    public void setPlayerCards(HashMap< Color , ArrayList<Card> > playerCards) {
+        this.playerCards = playerCards;
+    }
+
+    public void putPlayerCards(Color color, ArrayList<Card> cards) {
+        getPlayerCards().put(color, cards);
+    }
+
+    public ArrayList<Card> getPlayerCardsBasedOnColor(Color color) {
+        return getPlayerCards().get(color);
+    }
 
 }

@@ -3,6 +3,8 @@ package chessuno.player;
 import java.util.ArrayList;
 
 import chessuno.Color;
+import chessuno.cards.Card;
+import chessuno.chessPieces.ChessPiece;
 
 public class PlayerManager {
 
@@ -47,5 +49,29 @@ public class PlayerManager {
         return PlayerManager.players.size();
     }
 
+    public void setPlayerChessPiecesAndCards(Color color, ArrayList<ChessPiece> chessPieces, ArrayList<Card> cards) {
+        Player player = findPlayerBasedOnColor(color);
 
+        player.setChessPieces(chessPieces);
+        player.setCards(cards);
+
+    }
+
+    public Player findPlayerBasedOnColor(Color color) {
+        for (int i = 0; i < PlayerManager.players.size(); i++) { // for each player : PlayerManager.players) {
+            Player player = this.getPlayers().get(i);
+            if (player.getColor() == color) {
+                return player;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }   
+
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
+    }
 }
