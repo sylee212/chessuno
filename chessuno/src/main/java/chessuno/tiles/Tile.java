@@ -6,7 +6,7 @@ import chessuno.Color;
 import chessuno.GetClickType;
 import chessuno.ImageManager;
 import chessuno.SetClick;
-import chessuno.player.Player;
+import chessuno.chessPieces.ChessPiece;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -24,10 +24,9 @@ public class Tile implements SetClick,GetClickType {
 
     protected ChessLocation chessLocation;
 
-    // determines if the player is on, if its on who is it
-    protected Player playerOnTile;
+    private boolean isChessPieceOnTile;
 
-    protected boolean isPlayerOnTile;
+    private ChessPiece chessPieceOnTile;
 
     // the coordinates for the piece on the board
     private float UIXcoordinate;
@@ -67,7 +66,7 @@ public class Tile implements SetClick,GetClickType {
     private void setOnClick() {
         getImageView().setOnMouseClicked(event -> {
             toggleIsClick();
-            System.out.println("Tile clicked: " + getChessLocation().getChessColumnCoordinate() + " " +  getChessLocation().getChessRowCoordinate());
+            System.out.println("Tile clicked: " + getChessLocation().getChessColumnCoordinate() + " " +  getChessLocation().getChessRowCoordinate() + " " + getIsChessPieceOnTile());
         });
     }
 
@@ -182,5 +181,34 @@ public class Tile implements SetClick,GetClickType {
     }
 
     
+
+
+    /**
+     * @return boolean return the isChessPieceOnTile
+     */
+    public boolean getIsChessPieceOnTile() {
+        return isChessPieceOnTile;
+    }
+
+    /**
+     * @param isChessPieceOnTile the isChessPieceOnTile to set
+     */
+    public void setIsChessPieceOnTile(boolean isChessPieceOnTile) {
+        this.isChessPieceOnTile = isChessPieceOnTile;
+    }
+
+    /**
+     * @return ChessPiece return the chessPieceOnTile
+     */
+    public ChessPiece getChessPieceOnTile() {
+        return chessPieceOnTile;
+    }
+
+    /**
+     * @param chessPieceOnTile the chessPieceOnTile to set
+     */
+    public void setChessPieceOnTile(ChessPiece chessPieceOnTile) {
+        this.chessPieceOnTile = chessPieceOnTile;
+    }
 
 }

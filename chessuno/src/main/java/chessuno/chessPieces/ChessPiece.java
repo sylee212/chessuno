@@ -5,6 +5,7 @@ import chessuno.ClickType;
 import chessuno.Color;
 import chessuno.GetClickType;
 import chessuno.SetClick;
+import chessuno.tiles.Tile;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -25,6 +26,9 @@ public abstract class ChessPiece implements SetClick, GetClickType{
 
     // the location of this piece
     protected ChessLocation chessLocation;
+
+    // the tile that it is currently on
+    protected Tile tileOn;
 
     // the UI associated to this piece
     private Image image;
@@ -132,6 +136,14 @@ public abstract class ChessPiece implements SetClick, GetClickType{
     public ChessLocation getChessLocation() {
         return chessLocation;
     }
+
+    public Tile getTileOn() {
+        return tileOn;
+    }
+
+    public void setTileOn(Tile tileOn) {
+        this.tileOn = tileOn;
+    }  
 
     
     private void toggleIsClick(){

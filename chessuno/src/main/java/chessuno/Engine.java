@@ -3,7 +3,9 @@ package chessuno;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import chessuno.chessPieces.ChessPiece;
 import chessuno.chessPieces.ChessPieceManager;
+import chessuno.tiles.Tile;
 import chessuno.tiles.TileManager;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -67,8 +69,12 @@ public class Engine {
         // instantiate the singletons
         this.chessPieceManager = ChessPieceManager.getInstance();
 
+        // instantiate the singletons
         this.tileManager = TileManager.getInstance();
 
+
+        // unite the chess pieces and the tiles
+        setChessPieceAndTile();
         
 
     }
@@ -126,6 +132,52 @@ public class Engine {
         stage.show();
 
     }
+
+    private void setChessPieceAndTile() {
+        
+        ArrayList<ChessPiece> blackChessPieceList = chessPieceManager.getBlackChessPieceList();
+
+        ArrayList<ChessPiece> whiteChessPieceList = chessPieceManager.getWhiteChessPieceList();
+        
+        ArrayList<ArrayList<Tile>> tileList = tileManager.getTileListGridForm();
+
+
+        // iterate through the chess pieces and add their location 
+        ArrayList<ChessPiece> currentChessPieceList = blackChessPieceList;
+
+        int currentChessPieceListSize = currentChessPieceList.size();
+
+        // to iterate over the 2 lists
+        for ( int x = 0 ; x < 2 ; x++ ) {
+
+            // to iterate over all the chess pieces
+            for ( int i = 0 ; i < currentChessPieceListSize ; i++ ) {
+                // get the current chess piece
+                ChessPiece chessPiece = currentChessPieceList.get(i);
+
+                // get the current location
+                int col = chessPiece.getChessLocation().getChessColumnCoordinate();
+                int row = chessPiece.getChessLocation().getChessRowCoordinate();
+
+                // get the correct tile
+                Tile tile = tileList.get(row).get(col);
+
+                // set the chessPiece to the tile
+                tile.setChessPieceOnTile(chessPiece);
+
+                // set the chessPiece on the tile to true
+                tile.setIsChessPieceOnTile(true);
+
+                // set the tile to the chessPiece
+                chessPiece.setTileOn(tile);
+
+            }
+            currentChessPieceList = whiteChessPieceList;
+        }
+
+
+    }
+
 
     /**
      * This function still exist because the change must inform the engine so that the engine can tell the state manager
@@ -191,28 +243,4 @@ public class Engine {
 
 
 }
-/*
- *        
-        // Load the FXML file
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/chessuno/game.fxml"));
-        Pane root = loader.load();
 
-        GameController gameController = loader.getController();
-
-        AnchorPane gameControllerAnchorPane = gameController.getGameAnchorPane();
-
-        // Create Tile and Pawn
-        Tile piece = new Tile(Color.WHITE, 0, 0);
-        Pawn pawn = new Pawn(Color.WHITE);
-
-        // Add Tile and Pawn to the layout (assuming Pane is the root layout)
-        gameControllerAnchorPane.getChildren().addAll(piece.getImageView(), pawn.getImageView());
- 
-        // Create and set the scene
-        Scene scene = new Scene(gameControllerAnchorPane, 640, 480);
-        stage.setScene(scene);
-
-        // Show the stage
-        stage.show();
-
- */
