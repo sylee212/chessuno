@@ -65,7 +65,6 @@ public class GameController {
         // add to anchorpane
         GameAnchorPane.getChildren().add(getCardAnchorPane());
 
-
         setScreenContentPositions();
 
         // used for testing

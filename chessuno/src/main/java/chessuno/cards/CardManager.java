@@ -13,12 +13,17 @@ public class CardManager {
 
     private HashMap< Color , ArrayList<Card> > playerCards;
 
+    private CardDeck cardDeck;
+
     
 
     private CardManager() {
 
         // initialize the hashmap
         playerCards = new HashMap<>();
+
+        // initialize the card deck
+        setCardDeck(new CardDeck());
     }   
 
     public static CardManager getInstance() {
@@ -72,6 +77,21 @@ public class CardManager {
 
     public ArrayList<Card> getPlayerCardsBasedOnColor(Color color) {
         return getPlayerCards().get(color);
+    }
+
+
+    /**
+     * @return CardDeck return the cardDeck
+     */
+    public CardDeck getCardDeck() {
+        return cardDeck;
+    }
+
+    /**
+     * @param cardDeck the cardDeck to set
+     */
+    public void setCardDeck(CardDeck cardDeck) {
+        this.cardDeck = cardDeck;
     }
 
 }

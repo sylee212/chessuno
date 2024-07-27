@@ -36,6 +36,16 @@ public class ImageManager {
 
     private ImageManager() {}
 
+    public Image getCardBackImage(){
+
+        return new Image(getClass().getResource(imageDirectory + "cardBack.png").toString());
+    }
+
+    public Image getCardDeckImage(){
+
+        return new Image(getClass().getResource(imageDirectory + "cardDeck.png").toString());
+    }
+
     public Image getNumberImage(int number) {
     
         // returns an image based on the number

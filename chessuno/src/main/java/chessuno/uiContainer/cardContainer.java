@@ -42,6 +42,16 @@ public class CardContainer {
     private double bottomCardGridPaneX;
     private double bottomCardGridPaneY;
 
+    // the middle gridPane that will store the cards that is played and the deck
+    private  GridPane middleCardGridPane;
+    
+    private double middleCardGridPaneWidth;
+    private double middleCardGridPaneHeight;
+
+    private double middleCardGridPaneX;
+    private double middleCardGridPaneY;
+
+
 
 
 
@@ -61,7 +71,14 @@ public class CardContainer {
         setBottomCardGridPaneWidth(200);
         setBottomCardGridPaneHeight(200);
         setBottomCardGridPaneX(0);
-        setBottomCardGridPaneY(500);
+        setBottomCardGridPaneY(600);
+
+        setMiddleCardGridPaneWidth(200);
+        setMiddleCardGridPaneHeight(200);
+
+        // 200 is not bad of a coordinate for x
+        setMiddleCardGridPaneX(0);
+        setMiddleCardGridPaneY(300);
 
         // set the gridpanes coordinates and size
         setGridPanes();
@@ -82,10 +99,12 @@ public class CardContainer {
         // initialize the gridPanes
         setTopCardGridPane( new GridPane() );
         setBottomCardGridPane( new GridPane() );
+        setMiddleCardGridPane( new GridPane() );
 
         // secondly add them to the cardContainerAnchorPane
         cardContainerAnchorPane.getChildren().add(topCardGridPane);
         cardContainerAnchorPane.getChildren().add(bottomCardGridPane);
+        cardContainerAnchorPane.getChildren().add(middleCardGridPane);
 
         // set the top gridPane
         topCardGridPane.setLayoutX(getTopCardGridPaneX());
@@ -98,6 +117,12 @@ public class CardContainer {
         bottomCardGridPane.setLayoutY(getBottomCardGridPaneY());
         bottomCardGridPane.setPrefWidth(getBottomCardGridPaneWidth());
         bottomCardGridPane.setPrefHeight(getBottomCardGridPaneHeight());
+
+        // set the middle gridPane
+        middleCardGridPane.setLayoutX(getMiddleCardGridPaneX());
+        middleCardGridPane.setLayoutY(getMiddleCardGridPaneY());
+        middleCardGridPane.setPrefWidth(getMiddleCardGridPaneWidth());
+        middleCardGridPane.setPrefHeight(getMiddleCardGridPaneHeight());
         
     }
 
@@ -121,6 +146,14 @@ public class CardContainer {
             }
         }
 
+        // set the card deck in the middle
+        setCardDeckInMiddle();
+
+    }
+
+    private void setCardDeckInMiddle(){
+
+        middleCardGridPane.add( cardManager.getCardDeck().getCardDeckStackPane() , 0 , 0 );
     }
 
     
@@ -356,6 +389,77 @@ public class CardContainer {
      */
     public void setCardContainerAnchorPaneY(double cardContainerAnchorPaneY) {
         this.cardContainerAnchorPaneY = cardContainerAnchorPaneY;
+    }
+
+
+    /**
+     * @return GridPane return the middleCardGridPane
+     */
+    public GridPane getMiddleCardGridPane() {
+        return middleCardGridPane;
+    }
+
+    /**
+     * @param middleCardGridPane the middleCardGridPane to set
+     */
+    public void setMiddleCardGridPane(GridPane middleCardGridPane) {
+        this.middleCardGridPane = middleCardGridPane;
+    }
+
+    /**
+     * @return double return the middleCardGridPaneWidth
+     */
+    public double getMiddleCardGridPaneWidth() {
+        return middleCardGridPaneWidth;
+    }
+
+    /**
+     * @param middleCardGridPaneWidth the middleCardGridPaneWidth to set
+     */
+    public void setMiddleCardGridPaneWidth(double middleCardGridPaneWidth) {
+        this.middleCardGridPaneWidth = middleCardGridPaneWidth;
+    }
+
+    /**
+     * @return double return the middleCardGridPaneHeight
+     */
+    public double getMiddleCardGridPaneHeight() {
+        return middleCardGridPaneHeight;
+    }
+
+    /**
+     * @param middleCardGridPaneHeight the middleCardGridPaneHeight to set
+     */
+    public void setMiddleCardGridPaneHeight(double middleCardGridPaneHeight) {
+        this.middleCardGridPaneHeight = middleCardGridPaneHeight;
+    }
+
+    /**
+     * @return double return the middleCardGridPaneX
+     */
+    public double getMiddleCardGridPaneX() {
+        return middleCardGridPaneX;
+    }
+
+    /**
+     * @param middleCardGridPaneX the middleCardGridPaneX to set
+     */
+    public void setMiddleCardGridPaneX(double middleCardGridPaneX) {
+        this.middleCardGridPaneX = middleCardGridPaneX;
+    }
+
+    /**
+     * @return double return the middleCardGridPaneY
+     */
+    public double getMiddleCardGridPaneY() {
+        return middleCardGridPaneY;
+    }
+
+    /**
+     * @param middleCardGridPaneY the middleCardGridPaneY to set
+     */
+    public void setMiddleCardGridPaneY(double middleCardGridPaneY) {
+        this.middleCardGridPaneY = middleCardGridPaneY;
     }
 
 }

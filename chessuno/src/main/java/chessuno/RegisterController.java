@@ -151,6 +151,7 @@ public class RegisterController {
 
         // check if the max player cap is reached
         if ( PlayerManager.getInstance().getNumberOfPlayers() >= PlayerManager.MAX_NUMBER_OF_PLAYERS ) {
+            
             playerMaxReached();
         }
 
