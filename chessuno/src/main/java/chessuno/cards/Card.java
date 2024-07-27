@@ -16,6 +16,7 @@ public class Card implements GetClickType{
 
     // the core attributes of the card
     private Color color;
+    private Color chessPieceColor;
     private ChessPieceType chessPieceType;
     private int number;
 
@@ -34,17 +35,18 @@ public class Card implements GetClickType{
 
 
 
-    public Card(Color color, ChessPieceType chessPieceType, int number) {
+    public Card(Color color, Color chessPieceColor, ChessPieceType chessPieceType, int number) {
         // set the card data
         setClickType(clickType.CARD);
 
         setColor(color);
+        setChessPieceColor(chessPieceColor);
         setChessPieceType(chessPieceType);
         setNumber(number);
 
         // set the images
         setBaseImage( ImageManager.getInstance().getBlankColorBaseImage(color) );
-        setChessPieceImage( ImageManager.getInstance().getChessPieceImage(color, chessPieceType) );
+        setChessPieceImage( ImageManager.getInstance().getChessPieceImage(chessPieceColor, chessPieceType) );
         setNumberImage( ImageManager.getInstance().getNumberImage(number) );
 
         // set the imageViews
@@ -255,5 +257,20 @@ public class Card implements GetClickType{
     }
 
 
+
+
+    /**
+     * @return Color return the chessPieceColor
+     */
+    public Color getChessPieceColor() {
+        return chessPieceColor;
+    }
+
+    /**
+     * @param chessPieceColor the chessPieceColor to set
+     */
+    public void setChessPieceColor(Color chessPieceColor) {
+        this.chessPieceColor = chessPieceColor;
+    }
 
 }

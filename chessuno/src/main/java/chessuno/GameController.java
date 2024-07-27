@@ -2,6 +2,7 @@ package chessuno;
 
 import java.util.ArrayList;
 
+import chessuno.player.PlayerManager;
 import chessuno.uiContainer.CardContainer;
 import chessuno.uiContainer.ChessBoardContainer;
 import javafx.fxml.FXML;
@@ -36,6 +37,8 @@ public class GameController {
      */
     @FXML
     private void initialize(){
+
+        System.out.println("this is who is first " + PlayerManager.getInstance().getClass());
 
         // store the size of the screen // 
         ArrayList<Double> screenSize = Engine.getScreenSize();
@@ -82,23 +85,41 @@ public class GameController {
         // because we can only get the size of the gridpane after the gridpane is added to the anchorpane
         // Access the size of the GridPane after layout
         getChessBoardGridPane().layoutBoundsProperty().addListener((obs, oldBounds, newBounds) -> {
+
+            // set chess board size //
             double width = getChessBoardGridPane().getWidth();
             double height = getChessBoardGridPane().getHeight();
 
             chessBoard.setChessBoardGridPaneWidth( width);
             chessBoard.setChessBoardGridPaneHeight( height);
 
+            // set card board size // 
+            double cardAnchorPaneWidth = getCardAnchorPane().getWidth();
+            double cardAnchorPaneHeight = getCardAnchorPane().getHeight();
+
+            cardContainer.setCardContainerAnchorPaneWidth( cardAnchorPaneWidth);
+            cardContainer.setCardContainerAnchorPaneHeight( cardAnchorPaneHeight);
+
         });
 
         System.out.println("GridPane width: " + chessBoard.getChessBoardGridPaneWidth());
         System.out.println("GridPane height: " + chessBoard.getChessBoardGridPaneHeight());
 
+        // set chess board location on UI //
         // the y coordinate might need to change
         double gridPaneX = 100;
-        double gridPaneY = y;
+        double gridPaneY = 100;
 
         getChessBoardGridPane().setLayoutX(gridPaneX);
         getChessBoardGridPane().setLayoutY(gridPaneY);
+
+        // set the card board location on UI //
+        // the y coordinate might need to change
+        double cardAnchorPaneX = x;
+        double cardAnchorPaneY = 100;
+
+        getCardAnchorPane().setLayoutX(cardAnchorPaneX);
+        getCardAnchorPane().setLayoutY(cardAnchorPaneY);
 
 
     }

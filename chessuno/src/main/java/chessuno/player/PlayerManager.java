@@ -17,6 +17,9 @@ public class PlayerManager {
     // list of players
     private static ArrayList<Player> players;
 
+    // stores the current player
+    private Player currentPlayer;
+
 
     private PlayerManager() {
         PlayerManager.players = new ArrayList<>();
@@ -32,6 +35,13 @@ public class PlayerManager {
     }
 
     public boolean createPlayer(String name, Color color) {
+
+        // if we are adding the last player, set the current player to the first player
+        if ( getNumberOfPlayers() + 1 > MAX_NUMBER_OF_PLAYERS) {
+            Player currentPlayer = findPlayerBasedOnColor(Color.WHITE);
+            setCurrentPlayer(currentPlayer);
+            
+        }
 
         // if there is max number of player, do not allow more player
         if ( getNumberOfPlayers() < MAX_NUMBER_OF_PLAYERS) {
@@ -74,4 +84,19 @@ public class PlayerManager {
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
     }
+
+    /**
+     * @return Player return the currentPlayer
+     */
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    /**
+     * @param currentPlayer the currentPlayer to set
+     */
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
 }

@@ -18,6 +18,12 @@ public class CardContainer {
     // this is the AnchorPane that will store everything    
     private AnchorPane cardContainerAnchorPane;
 
+    private double cardContainerAnchorPaneWidth;
+    private double cardContainerAnchorPaneHeight;
+
+    private double cardContainerAnchorPaneX;
+    private double cardContainerAnchorPaneY;
+
     // the top gridPane that will store the cards for the top player
     private  GridPane topCardGridPane;
 
@@ -55,7 +61,7 @@ public class CardContainer {
         setBottomCardGridPaneWidth(200);
         setBottomCardGridPaneHeight(200);
         setBottomCardGridPaneX(0);
-        setBottomCardGridPaneY(400);
+        setBottomCardGridPaneY(500);
 
         // set the gridpanes coordinates and size
         setGridPanes();
@@ -99,8 +105,6 @@ public class CardContainer {
         // get the cards hash map
         HashMap<Color, ArrayList<Card>> cardsHashMap = cardManager.getPlayerCards();
 
-        GridPane currentGridPane = topCardGridPane;
-
         // for all the cards array list 
         for ( ArrayList<Card> cardsList : cardsHashMap.values() ) {
 
@@ -110,12 +114,11 @@ public class CardContainer {
                 
                 Card card = cardsList.get(x);
 
+                GridPane currentGridPane = card.getChessPieceColor() == Color.WHITE ? bottomCardGridPane : topCardGridPane;
+
                 // add it at position column x and row 0 because we only need 1 row
                 currentGridPane.add( card.getCardStackPane() , x , 0 );
             }
-
-            // move to the next gridPane
-            currentGridPane = bottomCardGridPane;
         }
 
     }
@@ -289,6 +292,70 @@ public class CardContainer {
      */
     public void setCardManager(CardManager cardManager) {
         this.cardManager = cardManager;
+    }
+
+
+    /**
+     * @return CardManager return the cardManager
+     */
+    public CardManager getCardManager() {
+        return cardManager;
+    }
+
+    /**
+     * @return double return the cardContainerAnchorPaneWidth
+     */
+    public double getCardContainerAnchorPaneWidth() {
+        return cardContainerAnchorPaneWidth;
+    }
+
+    /**
+     * @param cardContainerAnchorPaneWidth the cardContainerAnchorPaneWidth to set
+     */
+    public void setCardContainerAnchorPaneWidth(double cardContainerAnchorPaneWidth) {
+        this.cardContainerAnchorPaneWidth = cardContainerAnchorPaneWidth;
+    }
+
+    /**
+     * @return double return the cardContainerAnchorPaneHeight
+     */
+    public double getCardContainerAnchorPaneHeight() {
+        return cardContainerAnchorPaneHeight;
+    }
+
+    /**
+     * @param cardContainerAnchorPaneHeight the cardContainerAnchorPaneHeight to set
+     */
+    public void setCardContainerAnchorPaneHeight(double cardContainerAnchorPaneHeight) {
+        this.cardContainerAnchorPaneHeight = cardContainerAnchorPaneHeight;
+    }
+
+    /**
+     * @return double return the cardContainerAnchorPaneX
+     */
+    public double getCardContainerAnchorPaneX() {
+        return cardContainerAnchorPaneX;
+    }
+
+    /**
+     * @param cardContainerAnchorPaneX the cardContainerAnchorPaneX to set
+     */
+    public void setCardContainerAnchorPaneX(double cardContainerAnchorPaneX) {
+        this.cardContainerAnchorPaneX = cardContainerAnchorPaneX;
+    }
+
+    /**
+     * @return double return the cardContainerAnchorPaneY
+     */
+    public double getCardContainerAnchorPaneY() {
+        return cardContainerAnchorPaneY;
+    }
+
+    /**
+     * @param cardContainerAnchorPaneY the cardContainerAnchorPaneY to set
+     */
+    public void setCardContainerAnchorPaneY(double cardContainerAnchorPaneY) {
+        this.cardContainerAnchorPaneY = cardContainerAnchorPaneY;
     }
 
 }

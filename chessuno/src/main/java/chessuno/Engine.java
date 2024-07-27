@@ -38,6 +38,8 @@ public class Engine {
     // cardManager
     private CardManager cardManager;
 
+    
+
     // start scene change
     private static boolean isStartSceneChange;
 

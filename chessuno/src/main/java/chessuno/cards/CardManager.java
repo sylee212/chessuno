@@ -28,7 +28,9 @@ public class CardManager {
         return CardManager.cardManager;
     }
 
-    public ArrayList<Card> initializeCards(Color color) {
+    public ArrayList<Card> initializeCards(Color chessPieceColor) {
+
+        System.out.println(chessPieceColor);
 
         // create the cards list
         ArrayList<Card> cardsList = new ArrayList<>();
@@ -38,13 +40,11 @@ public class CardManager {
 
         // for each card, create a card and add it to the list
         for (int i = 0; i < MAX_NUMBER_OF_CARDS_PER_PLAYER; i++) {
-            cardsList.add(cardFactory.createRandomCard());
+            cardsList.add(cardFactory.createRandomCard(chessPieceColor));
         }
 
         // add the cards to the list
-        putPlayerCards(color, cardsList);
-
-        System.out.println("this is the list of player cards: " + CardManager.getInstance().getPlayerCards());
+        putPlayerCards(chessPieceColor, cardsList);
 
         return cardsList;
     }

@@ -17,8 +17,8 @@ public class CardFactory {
     private static CardFactory cardFactory;
 
     // the card dimensions
-    public final double CARD_WIDTH = 100;
-    public final double CARD_HEIGHT = 150;
+    public final double CARD_WIDTH = 50;
+    public final double CARD_HEIGHT = 100;
 
     // the center point of the StackPane 
     public final double CARD_X_CENTER = CARD_WIDTH / 2;
@@ -73,7 +73,7 @@ public class CardFactory {
         return CardFactory.cardFactory;
     }
 
-    public Card createRandomCard() {
+    public Card createRandomCard(Color chessPieceColor) {
         
         // initialize the random variable
         Random random = new Random();
@@ -94,12 +94,12 @@ public class CardFactory {
         Color selectedCardColor = possibleColors.get(randomCardColor);
 
 
-        return new Card(selectedCardColor, selectedChessPiece, selectedCardNumber);
+        return new Card(selectedCardColor, chessPieceColor, selectedChessPiece, selectedCardNumber);
 
     }
 
-    public Card createSpecificCard(Color color, ChessPieceType chessPieceType, int number) {
-        return new Card(color, chessPieceType, number);
+    public Card createSpecificCard(Color color, Color chessPieceColor, ChessPieceType chessPieceType, int number) {
+        return new Card(color, chessPieceColor,  chessPieceType, number);
     }
 
     private void setCardNumbers(){
