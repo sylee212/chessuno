@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import chessuno.cards.Card;
+import chessuno.cards.CardDeck;
 import chessuno.cards.CardManager;
 import chessuno.chessPieces.ChessPiece;
 import chessuno.chessPieces.ChessPieceManager;
@@ -97,6 +98,9 @@ public class Engine {
     }
 
 
+    /** 
+     * If possible find a wayy to avoid type casting
+     */
     public void informEngineEntityClicked(EntityClicked entity) {
         
         // get the click type of the entity that called the engine
@@ -109,18 +113,31 @@ public class Engine {
         Player player = playerManager.getCurrentPlayer();
         
         // get the player color
-        Color playerColor = player.getColor();
+        Color playerColor = player.getColor();       
 
-       EntityClicked originalEntity = entity.getOriginal();
-
-       System.out.println("original entity = " + originalEntity);
 
 
         // if the click type is card
-        if (clickType == ClickType.CARD && clickedCard != null  ) {
+        if (clickType == ClickType.CARD && clickedCard == null  ) {
+            Card originalEntity = (Card) entity.getOriginal();
 
+            System.out.println("original entity = " + originalEntity);
 
+        } else if( clickType == ClickType.CHESSPIECE ) {
+            ChessPiece originalEntity = (ChessPiece)entity.getOriginal();
+
+            System.out.println("original entity = " + originalEntity);
+        } else if ( clickType == ClickType.TILE ) {
+            Tile originalEntity = (Tile)entity.getOriginal();
+
+            System.out.println("original entity = " + originalEntity);
+        } else if ( clickType == ClickType.DECK ) {
+
+            CardDeck originalEntity = (CardDeck)entity.getOriginal();
+
+            System.out.println("original entity = " + originalEntity);
         }
+        
 
 
     }
