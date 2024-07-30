@@ -3,13 +3,13 @@ package chessuno.cards;
 import chessuno.ClickType;
 import chessuno.Color;
 import chessuno.Engine;
-import chessuno.GetClickType;
+import chessuno.EntityClicked;
 import chessuno.ImageManager;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 
-public class CardDeck implements GetClickType {
+public class CardDeck implements EntityClicked {
 
     private ClickType clickType;
 
@@ -71,6 +71,19 @@ public class CardDeck implements GetClickType {
         getCardDeckStackPane().setOnMouseClicked(event -> {
            Engine.getInstance().informEngineEntityClicked(this);
         });
+    }
+
+    @Override
+    public void entityClicked(){
+        System.out.println("Deck clicked");
+    }
+
+    /**
+     * This function will return null cause it has no chessPiece associated with it
+     */
+    @Override
+    public Color getEntityChessPieceColor(){
+        return null;
     }
 
     public Image getCardDeckImage() {

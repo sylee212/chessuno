@@ -38,6 +38,9 @@ public class Engine {
     // cardManager
     private CardManager cardManager;
 
+    // playerManager
+    private PlayerManager playerManager;
+
     
 
     // start scene change
@@ -84,6 +87,9 @@ public class Engine {
         // set the players to be connected to the chess pieces and cards
         this.cardManager = CardManager.getInstance();
 
+        // set the playerManager
+        this.playerManager = PlayerManager.getInstance();
+
         // unite the chess pieces and the tiles
         setChessPieceAndTile();
         
@@ -91,9 +97,30 @@ public class Engine {
     }
 
 
-    public void informEngineEntityClicked(GetClickType getClickType) {
+    public void informEngineEntityClicked(EntityClicked entity) {
         
-        System.out.println("Engine informed through function");
+        // get the click type of the entity that called the engine
+        ClickType clickType = entity.getClickType();
+
+        // get the clicked card if exist
+        Card clickedCard = cardManager.getClickedCard();
+
+        // get the current player
+        Player player = playerManager.getCurrentPlayer();
+        
+        // get the player color
+        Color playerColor = player.getColor();
+
+       entity.entityClicked();
+
+
+        // if the click type is card
+        if (clickType == ClickType.CARD && clickedCard != null  ) {
+
+
+        }
+
+
     }
     
 

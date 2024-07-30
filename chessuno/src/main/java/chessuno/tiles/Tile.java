@@ -4,14 +4,14 @@ import chessuno.ChessLocation;
 import chessuno.ClickType;
 import chessuno.Color;
 import chessuno.Engine;
-import chessuno.GetClickType;
+import chessuno.EntityClicked;
 import chessuno.ImageManager;
 import chessuno.SetClick;
 import chessuno.chessPieces.ChessPiece;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class Tile implements SetClick,GetClickType {
+public class Tile implements SetClick,EntityClicked {
 
     // the color of this piece
     private Color color;
@@ -69,6 +69,18 @@ public class Tile implements SetClick,GetClickType {
             toggleIsClick();
             Engine.getInstance().informEngineEntityClicked(this);
         });
+    }
+
+    @Override
+    public void entityClicked(){
+        System.out.println("Tile clicked");
+    }
+    /**
+     * This returns the color of the chessPiece associated with it
+     */
+    @Override
+    public Color getEntityChessPieceColor(){
+        return chessPieceOnTile.getColor();
     }
 
     private void toggleIsClick(){

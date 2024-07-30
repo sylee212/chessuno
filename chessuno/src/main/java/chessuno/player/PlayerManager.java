@@ -36,22 +36,26 @@ public class PlayerManager {
 
     public boolean createPlayer(String name, Color color) {
 
-        // if we are adding the last player, set the current player to the first player
-        if ( getNumberOfPlayers() + 1 > MAX_NUMBER_OF_PLAYERS) {
-            Player currentPlayer = findPlayerBasedOnColor(Color.WHITE);
-            setCurrentPlayer(currentPlayer);
-            
-        }
+        boolean res;
 
         // if there is max number of player, do not allow more player
         if ( getNumberOfPlayers() < MAX_NUMBER_OF_PLAYERS) {
             Player player = new Player(name, color);
             PlayerManager.players.add(player);
-            return true;
+            res = true;
         }
         else {
-            return false;
+            res = false;
         }
+
+        // if we are adding the last player, set the current player to the first player
+        if ( getNumberOfPlayers() >= MAX_NUMBER_OF_PLAYERS) {
+            Player currentPlayer = findPlayerBasedOnColor(Color.WHITE);
+            setCurrentPlayer(currentPlayer);
+            
+        }
+
+        return res;
 
     }
 

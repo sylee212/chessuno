@@ -19,6 +19,8 @@ public class CardManager {
     
     private CardFactory cardFactory;
 
+    private Card clickedCard;
+
     
 
     
@@ -138,6 +140,21 @@ public class CardManager {
      */
     public void setCardFactory(CardFactory cardFactory) {
         this.cardFactory = cardFactory;
+    }
+
+
+    /**
+     * @return Card return the clickedCard
+     */
+    public Card getClickedCard() {
+        return clickedCard;
+    }
+
+    /**
+     * @param clickedCard the clickedCard to set
+     */
+    public void setClickedCard(Card clickedCard) {
+        this.clickedCard = clickedCard;
     }
 
 }

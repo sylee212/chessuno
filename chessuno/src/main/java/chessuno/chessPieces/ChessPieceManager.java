@@ -15,6 +15,8 @@ public class ChessPieceManager {
 
     private ChessPieceFactory chessPieceFactory;
 
+    private ChessPiece clickedChessPiece;
+
     private ChessPieceManager(){
 
         chessPieceFactory = ChessPieceFactory.getInstance();
@@ -141,5 +143,48 @@ public class ChessPieceManager {
     }
 
 
+
+
+    /**
+     * @return ArrayList<ChessPiece> return the whiteChessPiecesList
+     */
+    public ArrayList<ChessPiece> getWhiteChessPiecesList() {
+        return whiteChessPiecesList;
+    }
+
+    /**
+     * @param whiteChessPiecesList the whiteChessPiecesList to set
+     */
+    public void setWhiteChessPiecesList(ArrayList<ChessPiece> whiteChessPiecesList) {
+        this.whiteChessPiecesList = whiteChessPiecesList;
+    }
+
+    /**
+     * @return ChessPieceFactory return the chessPieceFactory
+     */
+    public ChessPieceFactory getChessPieceFactory() {
+        return chessPieceFactory;
+    }
+
+    /**
+     * @param chessPieceFactory the chessPieceFactory to set
+     */
+    public void setChessPieceFactory(ChessPieceFactory chessPieceFactory) {
+        this.chessPieceFactory = chessPieceFactory;
+    }
+
+    /**
+     * @return ChessPiece return the clickedChessPiece
+     */
+    public ChessPiece getClickedChessPiece() {
+        return clickedChessPiece;
+    }
+
+    /**
+     * @param clickedChessPiece the clickedChessPiece to set
+     */
+    public void setClickedChessPiece(ChessPiece clickedChessPiece) {
+        this.clickedChessPiece = clickedChessPiece;
+    }
 
 }

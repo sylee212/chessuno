@@ -4,13 +4,13 @@ import chessuno.ChessLocation;
 import chessuno.ClickType;
 import chessuno.Color;
 import chessuno.Engine;
-import chessuno.GetClickType;
+import chessuno.EntityClicked;
 import chessuno.SetClick;
 import chessuno.tiles.Tile;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public abstract class ChessPiece implements SetClick, GetClickType{
+public abstract class ChessPiece implements SetClick, EntityClicked{
 
     // the chess piece type
     private ChessPieceType chessPieceType;
@@ -162,6 +162,16 @@ public abstract class ChessPiece implements SetClick, GetClickType{
         getImageView().setOnMouseClicked((mouseEvent) -> {
            Engine.getInstance().informEngineEntityClicked(this);
         });
+    }
+
+    @Override
+    public void entityClicked(){
+        System.out.println("Chess Piece clicked");
+    }
+
+    @Override
+    public Color getEntityChessPieceColor(){
+        return getColor();
     }
 
     @Override
