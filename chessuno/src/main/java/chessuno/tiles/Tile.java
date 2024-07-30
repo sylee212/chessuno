@@ -72,15 +72,8 @@ public class Tile implements SetClick,EntityClicked {
     }
 
     @Override
-    public void entityClicked(){
-        System.out.println("Tile clicked");
-    }
-    /**
-     * This returns the color of the chessPiece associated with it
-     */
-    @Override
-    public Color getEntityChessPieceColor(){
-        return chessPieceOnTile.getColor();
+    public EntityClicked getOriginal(){
+        return this;
     }
 
     private void toggleIsClick(){

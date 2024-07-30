@@ -100,13 +100,8 @@ public class Card implements EntityClicked{
     }
 
     @Override
-    public void entityClicked(){
-        System.out.println("Card clicked");
-    }
-
-    @Override
-    public Color getEntityChessPieceColor(){
-        return getChessPieceColor();
+    public EntityClicked getOriginal(){
+        return this;
     }
 
     

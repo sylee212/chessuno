@@ -111,7 +111,9 @@ public class Engine {
         // get the player color
         Color playerColor = player.getColor();
 
-       entity.entityClicked();
+       EntityClicked originalEntity = entity.getOriginal();
+
+       System.out.println("original entity = " + originalEntity);
 
 
         // if the click type is card

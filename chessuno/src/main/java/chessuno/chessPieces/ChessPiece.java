@@ -164,14 +164,10 @@ public abstract class ChessPiece implements SetClick, EntityClicked{
         });
     }
 
-    @Override
-    public void entityClicked(){
-        System.out.println("Chess Piece clicked");
-    }
 
     @Override
-    public Color getEntityChessPieceColor(){
-        return getColor();
+    public EntityClicked getOriginal(){
+        return this;
     }
 
     @Override

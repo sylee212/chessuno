@@ -74,16 +74,8 @@ public class CardDeck implements EntityClicked {
     }
 
     @Override
-    public void entityClicked(){
-        System.out.println("Deck clicked");
-    }
-
-    /**
-     * This function will return null cause it has no chessPiece associated with it
-     */
-    @Override
-    public Color getEntityChessPieceColor(){
-        return null;
+    public EntityClicked getOriginal(){
+        return this;
     }
 
     public Image getCardDeckImage() {
