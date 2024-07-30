@@ -14,6 +14,10 @@ public class CardManager {
     private HashMap< Color , ArrayList<Card> > playerCards;
 
     private CardDeck cardDeck;
+    
+    private CardStack cardStack;
+    
+    private CardFactory cardFactory;
 
     
 
@@ -24,6 +28,19 @@ public class CardManager {
 
         // initialize the card deck
         setCardDeck(new CardDeck());
+
+        // initialize the card stack
+        setCardStack(new CardStack());
+
+        // initialize the factory
+        setCardFactory(CardFactory.getInstance());
+
+        // ask factory to generate a random card
+        // can be any color on here
+        Card firstCard = cardFactory.createRandomCard(Color.WHITE);
+
+        // add the first card to the cardStack
+        getCardStack().addCardToStack(firstCard );
     }   
 
     public static CardManager getInstance() {
@@ -39,9 +56,6 @@ public class CardManager {
 
         // create the cards list
         ArrayList<Card> cardsList = new ArrayList<>();
-
-        // get the card factory 
-        CardFactory cardFactory = CardFactory.getInstance();
 
         // for each card, create a card and add it to the list
         for (int i = 0; i < MAX_NUMBER_OF_CARDS_PER_PLAYER; i++) {
@@ -92,6 +106,36 @@ public class CardManager {
      */
     public void setCardDeck(CardDeck cardDeck) {
         this.cardDeck = cardDeck;
+    }
+
+
+    /**
+     * @return CardStack return the cardStack
+     */
+    public CardStack getCardStack() {
+        return cardStack;
+    }
+
+    /**
+     * @param cardStack the cardStack to set
+     */
+    public void setCardStack(CardStack cardStack) {
+        this.cardStack = cardStack;
+    }
+
+
+    /**
+     * @return CardFactory return the cardFactory
+     */
+    public CardFactory getCardFactory() {
+        return cardFactory;
+    }
+
+    /**
+     * @param cardFactory the cardFactory to set
+     */
+    public void setCardFactory(CardFactory cardFactory) {
+        this.cardFactory = cardFactory;
     }
 
 }
