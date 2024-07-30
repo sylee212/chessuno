@@ -3,6 +3,7 @@ package chessuno.chessPieces;
 import chessuno.ChessLocation;
 import chessuno.ClickType;
 import chessuno.Color;
+import chessuno.Engine;
 import chessuno.GetClickType;
 import chessuno.SetClick;
 import chessuno.tiles.Tile;
@@ -159,8 +160,14 @@ public abstract class ChessPiece implements SetClick, GetClickType{
         toggleIsClick();
 
         getImageView().setOnMouseClicked((mouseEvent) -> {
-            System.out.println("Piece clicked: " + getChessLocation().getChessColumnCoordinate() + " " +  getChessLocation().getChessRowCoordinate());
+           Engine.getInstance().informEngineEntityClicked(this);
         });
+    }
+
+    @Override
+    public String toString(){
+
+        return chessPieceType + " " + color;
     }
 
 }

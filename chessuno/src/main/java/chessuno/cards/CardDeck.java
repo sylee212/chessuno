@@ -1,12 +1,17 @@
 package chessuno.cards;
 
+import chessuno.ClickType;
 import chessuno.Color;
+import chessuno.Engine;
+import chessuno.GetClickType;
 import chessuno.ImageManager;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 
-public class CardDeck {
+public class CardDeck implements GetClickType {
+
+    private ClickType clickType;
 
     private Image cardDeckImage;
 
@@ -44,6 +49,9 @@ public class CardDeck {
 
         setCardDeckUISize();
 
+        // set Click Type
+        setClickType(ClickType.DECK);
+
         setOnClick();
     }
 
@@ -61,7 +69,7 @@ public class CardDeck {
     private void setOnClick(){
 
         getCardDeckStackPane().setOnMouseClicked(event -> {
-            System.out.println("Card deck clicked");
+           Engine.getInstance().informEngineEntityClicked(this);
         });
     }
 
@@ -174,6 +182,27 @@ public class CardDeck {
      */
     public void setCardDeckBaseImageViewHeight(double cardDeckBaseImageViewHeight) {
         this.cardDeckBaseImageViewHeight = cardDeckBaseImageViewHeight;
+    }
+
+
+    /**
+     * @return ClickType return the clickType
+     */
+    public ClickType getClickType() {
+        return clickType;
+    }
+
+    /**
+     * @param clickType the clickType to set
+     */
+    public void setClickType(ClickType clickType) {
+        this.clickType = clickType;
+    }
+
+    @Override
+    public String toString(){
+
+        return "CardDeck";
     }
 
 }

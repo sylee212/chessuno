@@ -2,6 +2,7 @@ package chessuno.cards;
 
 import chessuno.ClickType;
 import chessuno.Color;
+import chessuno.Engine;
 import chessuno.GetClickType;
 import chessuno.ImageManager;
 import chessuno.chessPieces.ChessPieceType;
@@ -94,7 +95,7 @@ public class Card implements GetClickType{
 
     public void setCardStackPaneOnClick(){
         getCardStackPane().setOnMouseClicked(event -> {
-            System.out.println("Card clicked");
+            Engine.getInstance().informEngineEntityClicked(this);
         });
     }
 
@@ -271,6 +272,12 @@ public class Card implements GetClickType{
      */
     public void setChessPieceColor(Color chessPieceColor) {
         this.chessPieceColor = chessPieceColor;
+    }
+
+    @Override
+    public String toString() {
+        return "Card [color=" + color + ", chessPieceColor=" + chessPieceColor + ", chessPieceType=" + chessPieceType
+                + ", number=" + number + "]";
     }
 
 }

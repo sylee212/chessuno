@@ -87,62 +87,17 @@ public class Engine {
         // unite the chess pieces and the tiles
         setChessPieceAndTile();
         
-        // the player cards are created after the players are created
+        // the player cards are created after the players are created //
     }
 
-    public void startGame(Stage stage)  throws IOException {
 
-        // assign the stage
-        Engine.stage = stage;
+    public void informEngineEntityClicked(GetClickType getClickType) {
         
-        startScene();
-
+        System.out.println("Engine informed through function");
     }
+    
 
-    /**
-     * Function to load the main scene for the game
-     * 
-     * To access the variables in the controller class
-            1) create the variable and make it the same name as the anchorPane in the controller class
-                @FXML
-                private AnchorPane GameAnchorPane;
-            2) dosent have to be private, can be public, if public no need method to access it
-            3) get the FXML
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/chessuno/game.fxml"));
-            4) load the fxml
-                Pane root = loader.load();
-            5) for load the fxml, although it is not used, need to load it. So what you can do is, 
-                this -> loader.load();
-                instead of 
-                this -> Pane root = loader.getController();
-            6) get the controller 
-                GameController controller = loader.getController();
-            7) access the variable, for this case, cause the variable is private, need to use a function
-                AnchorPane gameControllerAnchorPane = gameController.getGameAnchorPane();
-     * 
-     * @param stage
-     * @throws IOException
-     */
-    private void startScene() throws IOException {
- 
-        // Load the FXML file
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/chessuno/start.fxml"));
-        loader.load();
 
-        // get the controller. COMPULSORY
-        StartController startController = loader.getController();
-
-        // access the variable
-        AnchorPane startControllerAnchorPane = startController.getStartAnchorPane();
-
-        // Create and set the scene
-        Scene scene = new Scene(startControllerAnchorPane, maxScreenWidth, maxScreenHeight);
-        stage.setScene(scene);
-
-        // Show the stage
-        stage.show();
-
-    }
 
     private void setPlayerCards(){
         // get the players list
@@ -279,6 +234,60 @@ public class Engine {
         screenSize.add(screenHeightLocal);
 
         return screenSize;
+
+    }
+
+    public void startGame(Stage stage)  throws IOException {
+
+        // assign the stage
+        Engine.stage = stage;
+        
+        startScene();
+
+    }
+
+    /**
+     * Function to load the main scene for the game
+     * 
+     * To access the variables in the controller class
+            1) create the variable and make it the same name as the anchorPane in the controller class
+                @FXML
+                private AnchorPane GameAnchorPane;
+            2) dosent have to be private, can be public, if public no need method to access it
+            3) get the FXML
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/chessuno/game.fxml"));
+            4) load the fxml
+                Pane root = loader.load();
+            5) for load the fxml, although it is not used, need to load it. So what you can do is, 
+                this -> loader.load();
+                instead of 
+                this -> Pane root = loader.getController();
+            6) get the controller 
+                GameController controller = loader.getController();
+            7) access the variable, for this case, cause the variable is private, need to use a function
+                AnchorPane gameControllerAnchorPane = gameController.getGameAnchorPane();
+     * 
+     * @param stage
+     * @throws IOException
+     */
+    private void startScene() throws IOException {
+ 
+        // Load the FXML file
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/chessuno/start.fxml"));
+        loader.load();
+
+        // get the controller. COMPULSORY
+        StartController startController = loader.getController();
+
+        // access the variable
+        AnchorPane startControllerAnchorPane = startController.getStartAnchorPane();
+
+        // Create and set the scene
+        Scene scene = new Scene(startControllerAnchorPane, maxScreenWidth, maxScreenHeight);
+        stage.setScene(scene);
+
+        // Show the stage
+        stage.show();
 
     }
 
