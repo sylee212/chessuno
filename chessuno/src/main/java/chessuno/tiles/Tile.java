@@ -225,7 +225,7 @@ public class Tile implements SetClick,EntityClicked {
 
     @Override
     public String toString() {
-        return "Tile: " + getChessLocation().getChessColumnCoordinate() + ", " + getChessLocation().getChessRowCoordinate();
+        return "Tile |  column coordinates=" + getChessLocation().getChessColumnCoordinate() + ", row coordinates=" + getChessLocation().getChessRowCoordinate();
     }
 
 

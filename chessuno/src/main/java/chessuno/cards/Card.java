@@ -287,8 +287,8 @@ public class Card implements EntityClicked{
 
     @Override
     public String toString() {
-        return "Card [color=" + color + ", chessPieceColor=" + chessPieceColor + ", chessPieceType=" + chessPieceType
-                + ", number=" + number + "]";
+        return "Card | ID=" + uniqueID + ", color=" + color + ", chessPieceColor=" + chessPieceColor + ", chessPieceType=" + chessPieceType
+                + ", number=" + number ;
     }
 
 

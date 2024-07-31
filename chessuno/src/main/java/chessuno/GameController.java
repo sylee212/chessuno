@@ -2,7 +2,10 @@ package chessuno;
 
 import java.util.ArrayList;
 
+import chessuno.cards.CardManager;
+import chessuno.chessPieces.ChessPieceManager;
 import chessuno.player.PlayerManager;
+import chessuno.tiles.TileManager;
 import chessuno.uiContainer.CardContainer;
 import chessuno.uiContainer.ChessBoardContainer;
 import javafx.fxml.FXML;
@@ -71,6 +74,18 @@ public class GameController {
         // Card card = CardFactory.getInstance().createSpecificCard(Color.RED, ChessPieceType.BISHOP, 9);
 
         // GameAnchorPane.getChildren().add(card.getCardStackPane());
+
+        // for checking
+        System.out.println("GameController initialized");
+        System.out.println("Cards");
+        System.out.println( CardManager.getInstance().getPlayerCards() );
+        System.out.println( "black ChessPieces");
+        System.out.println( ChessPieceManager.getInstance().getBlackChessPieceList() );
+        System.out.println( "white ChessPieces");
+        System.out.println( ChessPieceManager.getInstance().getWhiteChessPieceList() );
+        System.out.println("Tiles");
+        System.out.println( TileManager.getInstance().getTileListGridForm().get(0) );
+
     }
 
     private void setScreenContentPositions(){

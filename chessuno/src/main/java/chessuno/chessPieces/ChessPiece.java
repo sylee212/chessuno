@@ -179,7 +179,7 @@ public abstract class ChessPiece implements SetClick, EntityClicked{
     @Override
     public String toString(){
 
-        return chessPieceType + " " + color;
+        return chessPieceType + " | ID=" + uniqueID + ", " + "Color=" + color;
     }
 
 

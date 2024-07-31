@@ -207,7 +207,7 @@ public class CardDeck implements EntityClicked {
     @Override
     public String toString(){
 
-        return "CardDeck";
+        return "CardDeck | ";
     }
 
 }
