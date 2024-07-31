@@ -6,8 +6,8 @@ import javafx.scene.image.ImageView;
 
 public class Bishop extends ChessPiece {
 
-    public Bishop(Color color) {
-        super(ChessPieceType.BISHOP, color);
+    public Bishop(int uniqueID, Color color) {
+        super( uniqueID, ChessPieceType.BISHOP, color);
 
         setImage(ImageManager.getInstance().getChessPieceImage(color, ChessPieceType.BISHOP));
 

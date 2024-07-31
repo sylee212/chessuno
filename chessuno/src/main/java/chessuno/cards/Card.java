@@ -15,6 +15,9 @@ public class Card implements EntityClicked{
     // what kind of click type is this
     private ClickType clickType;
 
+    // the unique ID for each of this class' objects
+    private int uniqueID;
+
     // the core attributes of the card
     private Color color;
     private Color chessPieceColor;
@@ -36,9 +39,12 @@ public class Card implements EntityClicked{
 
 
 
-    public Card(Color color, Color chessPieceColor, ChessPieceType chessPieceType, int number) {
+    public Card(int uniqueID,Color color, Color chessPieceColor, ChessPieceType chessPieceType, int number) {
         // set the card data
         setClickType(clickType.CARD);
+
+        // set the unique ID
+        setUniqueID(uniqueID);
 
         setColor(color);
         setChessPieceColor(chessPieceColor);
@@ -283,6 +289,21 @@ public class Card implements EntityClicked{
     public String toString() {
         return "Card [color=" + color + ", chessPieceColor=" + chessPieceColor + ", chessPieceType=" + chessPieceType
                 + ", number=" + number + "]";
+    }
+
+
+    /**
+     * @return int return the uniqueID
+     */
+    public int getUniqueID() {
+        return uniqueID;
+    }
+
+    /**
+     * @param uniqueID the uniqueID to set
+     */
+    public void setUniqueID(int uniqueID) {
+        this.uniqueID = uniqueID;
     }
 
 }

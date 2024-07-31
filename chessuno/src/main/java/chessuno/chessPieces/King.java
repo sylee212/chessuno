@@ -6,8 +6,8 @@ import javafx.scene.image.ImageView;
 
 public class King extends ChessPiece {
 
-    public King(Color color) {
-        super(ChessPieceType.KING, color);
+    public King(int uniqueID, Color color) {
+        super( uniqueID, ChessPieceType.KING, color);
 
         setImage(ImageManager.getInstance().getChessPieceImage(color, ChessPieceType.KING));
 

@@ -6,8 +6,8 @@ import javafx.scene.image.ImageView;
 
 public class Rook extends ChessPiece {
 
-    public Rook(Color color) {
-        super(ChessPieceType.ROOK, color);
+    public Rook(int uniqueID, Color color) {
+        super( uniqueID,ChessPieceType.ROOK, color);
 
         setImage(ImageManager.getInstance().getChessPieceImage(color, ChessPieceType.ROOK));
 

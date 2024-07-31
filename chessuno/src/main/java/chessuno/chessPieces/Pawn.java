@@ -6,8 +6,8 @@ import javafx.scene.image.ImageView;
 
 public class Pawn extends ChessPiece {
     
-    public Pawn(Color color) {
-        super(ChessPieceType.PAWN, color);
+    public Pawn(int uniqueID, Color color) {
+        super( uniqueID, ChessPieceType.PAWN, color);
 
         // set the image
         //setImage( new Image(getClass().getResource("whitePawn.png").toString()) );

@@ -16,6 +16,9 @@ public class Tile implements SetClick,EntityClicked {
     // the color of this piece
     private Color color;
 
+    // the unique ID for each of this class' objects
+    private int uniqueID;
+
     // if this piece is clicked
     // used for condition checking
     protected boolean isClick;
@@ -40,10 +43,13 @@ public class Tile implements SetClick,EntityClicked {
     // the ImageView associated to this piece
     private ImageView imageView;
 
-    public Tile(Color color, int tileColNumber, int tileRowNumber) {
+    public Tile(int uniqueID, Color color, int tileColNumber, int tileRowNumber) {
         // create the location
         // set the location
         chessLocation = new ChessLocation(tileColNumber, tileRowNumber);
+
+        // set the unique ID
+        setUniqueID(uniqueID);
 
         setColor(color);
         setClick(false);
@@ -220,6 +226,28 @@ public class Tile implements SetClick,EntityClicked {
     @Override
     public String toString() {
         return "Tile: " + getChessLocation().getChessColumnCoordinate() + ", " + getChessLocation().getChessRowCoordinate();
+    }
+
+
+    /**
+     * @return int return the uniqueID
+     */
+    public int getUniqueID() {
+        return uniqueID;
+    }
+
+    /**
+     * @param uniqueID the uniqueID to set
+     */
+    public void setUniqueID(int uniqueID) {
+        this.uniqueID = uniqueID;
+    }
+
+    /**
+     * @return boolean return the isChessPieceOnTile
+     */
+    public boolean isIsChessPieceOnTile() {
+        return isChessPieceOnTile;
     }
 
 }

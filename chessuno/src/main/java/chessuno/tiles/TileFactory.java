@@ -6,7 +6,11 @@ public class TileFactory {
 
     private static TileFactory tileFactory;
 
+    // the unique ID for each tile
+    private int uniqueID;
+
     private TileFactory() {
+        setUniqueID(0);
     }
 
     public static TileFactory getInstance() {
@@ -17,8 +21,30 @@ public class TileFactory {
     }
 
     public Tile createTile(Color color, int tileColNumber, int tileRowNumber) {
-        return new Tile(color, tileColNumber, tileRowNumber);
+        int ID = getUniqueID();
+
+        Tile tile = new Tile(ID, color, tileColNumber, tileRowNumber);
+
+        setUniqueID( getUniqueID() + 1);
+
+        return tile;
     }
 
+
+
+
+    /**
+     * @return int return the uniqueID
+     */
+    public int getUniqueID() {
+        return uniqueID;
+    }
+
+    /**
+     * @param uniqueID the uniqueID to set
+     */
+    public void setUniqueID(int uniqueID) {
+        this.uniqueID = uniqueID;
+    }
 
 }

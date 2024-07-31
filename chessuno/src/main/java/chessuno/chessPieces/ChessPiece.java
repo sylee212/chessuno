@@ -15,6 +15,9 @@ public abstract class ChessPiece implements SetClick, EntityClicked{
     // the chess piece type
     private ChessPieceType chessPieceType;
 
+    // the unique ID for each of this class' objects
+    private int uniqueID;
+
     // the color of this piece
     private Color color;
 
@@ -42,7 +45,10 @@ public abstract class ChessPiece implements SetClick, EntityClicked{
      * @param chessPieceType, the String of the type
      * @param color
     **/
-    public ChessPiece(ChessPieceType chessPieceType, Color color) {
+    public ChessPiece(int uniqueID, ChessPieceType chessPieceType, Color color) {
+        // set the unique ID
+        setUniqueID(uniqueID);
+
         setChessPieceType(chessPieceType);
         setColor(color);
         setClick(false);
@@ -174,6 +180,21 @@ public abstract class ChessPiece implements SetClick, EntityClicked{
     public String toString(){
 
         return chessPieceType + " " + color;
+    }
+
+
+    /**
+     * @return int return the uniqueID
+     */
+    public int getUniqueID() {
+        return uniqueID;
+    }
+
+    /**
+     * @param uniqueID the uniqueID to set
+     */
+    public void setUniqueID(int uniqueID) {
+        this.uniqueID = uniqueID;
     }
 
 }

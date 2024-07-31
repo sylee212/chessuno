@@ -16,6 +16,9 @@ public class CardFactory {
     // the singleton instance
     private static CardFactory cardFactory;
 
+    // set the unique ID of each card
+    private int uniqueID;
+
     // the card dimensions
     public final double CARD_WIDTH = 50;
     public final double CARD_HEIGHT = 100;
@@ -53,6 +56,9 @@ public class CardFactory {
 
 
     private CardFactory() {
+
+        // initialize the unique ID to 0
+        setUniqueID(0);
 
         // set the possible numbers
         setCardNumbers();
@@ -93,13 +99,30 @@ public class CardFactory {
         // get the selected card color
         Color selectedCardColor = possibleColors.get(randomCardColor);
 
+        // get the unique ID
+        int uniqueID = getUniqueID();
 
-        return new Card(selectedCardColor, chessPieceColor, selectedChessPiece, selectedCardNumber);
+        Card card = new Card(uniqueID, selectedCardColor, chessPieceColor, selectedChessPiece, selectedCardNumber);
+
+        // increment the unique ID
+        setUniqueID(uniqueID + 1);
+
+        return card;
+        
 
     }
 
     public Card createSpecificCard(Color color, Color chessPieceColor, ChessPieceType chessPieceType, int number) {
-        return new Card(color, chessPieceColor,  chessPieceType, number);
+
+        // get the unique ID
+        int uniqueID = getUniqueID();
+
+        Card card = new Card(uniqueID,color, chessPieceColor,  chessPieceType, number);
+
+        // increment the unique ID
+        setUniqueID(uniqueID + 1);
+
+        return card;
     }
 
     private void setCardNumbers(){
@@ -140,6 +163,63 @@ public class CardFactory {
         possibleColors.add(Color.RED);
         possibleColors.add(Color.GREEN);
         possibleColors.add(Color.YELLOW);
+    }
+
+
+    /**
+     * @return int return the uniqueID
+     */
+    public int getUniqueID() {
+        return uniqueID;
+    }
+
+    /**
+     * @param uniqueID the uniqueID to set
+     */
+    public void setUniqueID(int uniqueID) {
+        this.uniqueID = uniqueID;
+    }
+
+    /**
+     * @return ArrayList<Integer> return the possibleNumbers
+     */
+    public ArrayList<Integer> getPossibleNumbers() {
+        return possibleNumbers;
+    }
+
+    /**
+     * @param possibleNumbers the possibleNumbers to set
+     */
+    public void setPossibleNumbers(ArrayList<Integer> possibleNumbers) {
+        this.possibleNumbers = possibleNumbers;
+    }
+
+    /**
+     * @return ArrayList<ChessPieceType> return the possibleChessPiecesTypes
+     */
+    public ArrayList<ChessPieceType> getPossibleChessPiecesTypes() {
+        return possibleChessPiecesTypes;
+    }
+
+    /**
+     * @param possibleChessPiecesTypes the possibleChessPiecesTypes to set
+     */
+    public void setPossibleChessPiecesTypes(ArrayList<ChessPieceType> possibleChessPiecesTypes) {
+        this.possibleChessPiecesTypes = possibleChessPiecesTypes;
+    }
+
+    /**
+     * @return ArrayList<Color> return the possibleColors
+     */
+    public ArrayList<Color> getPossibleColors() {
+        return possibleColors;
+    }
+
+    /**
+     * @param possibleColors the possibleColors to set
+     */
+    public void setPossibleColors(ArrayList<Color> possibleColors) {
+        this.possibleColors = possibleColors;
     }
 
 }

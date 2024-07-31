@@ -118,24 +118,46 @@ public class Engine {
 
 
         // if the click type is card
-        if (clickType == ClickType.CARD && clickedCard == null  ) {
-            Card originalEntity = (Card) entity.getOriginal();
+        if (clickType == ClickType.CARD ) {
 
-            System.out.println("original entity = " + originalEntity);
+            // get the original entity that called the engine
+            Card originalEntity = (Card) entity.getOriginal();
+            System.out.println("Engine| original entity = " + originalEntity);
+
+            // get the color of the chessPiece on the card
+            Color cardChessPieceColor = originalEntity.getChessPieceColor();
+
+            // if the clicked card is null and the card's color is the same as the player's color
+            // means this card is put onto a pending state as it may be a valid move 
+            // NOT SURE IF THIS CARD IS VALID OR NOT YET. CHECK LATER 
+            if ( clickedCard == null && cardChessPieceColor == playerColor ) {
+                
+                // ask the cardManager to set this card as clicked Card
+                cardManager.setClickedCard(originalEntity);
+            } 
+            // if the there is already a card
+            else if ( clickedCard != null && cardChessPieceColor == playerColor ) {
+                
+                // check if the new clickedCard is the same as the old clickedCard
+                
+
+            }
 
         } else if( clickType == ClickType.CHESSPIECE ) {
+
             ChessPiece originalEntity = (ChessPiece)entity.getOriginal();
+            System.out.println("Engine| original entity = " + originalEntity);
 
-            System.out.println("original entity = " + originalEntity);
         } else if ( clickType == ClickType.TILE ) {
-            Tile originalEntity = (Tile)entity.getOriginal();
 
-            System.out.println("original entity = " + originalEntity);
+            Tile originalEntity = (Tile)entity.getOriginal();
+            System.out.println("Engine| original entity = " + originalEntity);
+
         } else if ( clickType == ClickType.DECK ) {
 
             CardDeck originalEntity = (CardDeck)entity.getOriginal();
+            System.out.println("Engine| original entity = " + originalEntity);
 
-            System.out.println("original entity = " + originalEntity);
         }
         
 
