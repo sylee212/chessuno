@@ -5,6 +5,8 @@ import chessuno.Color;
 import chessuno.Engine;
 import chessuno.EntityClicked;
 import chessuno.ImageManager;
+import chessuno.actions.ActionInformation;
+import chessuno.actions.CardClickedAction;
 import chessuno.chessPieces.ChessPieceType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -304,6 +306,25 @@ public class Card implements EntityClicked{
      */
     public void setUniqueID(int uniqueID) {
         this.uniqueID = uniqueID;
+    }
+
+    public CardClickedAction getCardClickedAction(Card cardOnTopOfStack) {
+
+        // create the action
+        CardClickedAction cardClickedAction = new CardClickedAction();
+
+        // create the information holder
+        ActionInformation actionInformation = new ActionInformation();
+
+        // fill the information
+        actionInformation.setcardClicked(this);
+        actionInformation.setCurrentCard(cardOnTopOfStack);
+
+        // fill the action
+        cardClickedAction.fillInformation(actionInformation);
+
+        // return the action
+        return cardClickedAction;
     }
 
 }

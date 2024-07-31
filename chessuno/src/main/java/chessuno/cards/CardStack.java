@@ -18,9 +18,11 @@ public class CardStack {
         setCardStackList( new ArrayList<Card>() );
     }
 
-    
+    public Card getLastCard() {
+        Card card = getCardStackList().get( getCardStackList().size() - 1 );
+        return card;
+    }
 
-    
 
     public AnchorPane getCardStackAnchorPane() {
         return cardStackAnchorPane;

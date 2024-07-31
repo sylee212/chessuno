@@ -3,6 +3,7 @@ package chessuno;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import chessuno.actions.CardClickedAction;
 import chessuno.cards.Card;
 import chessuno.cards.CardDeck;
 import chessuno.cards.CardManager;
@@ -135,10 +136,27 @@ public class Engine {
                 // ask the cardManager to set this card as clicked Card
                 cardManager.setClickedCard(originalEntity);
             } 
-            // if the there is already a card
+            // if the there is already a card, means the player could be confirming his choice to play this card
             else if ( clickedCard != null && cardChessPieceColor == playerColor ) {
                 
                 // check if the new clickedCard is the same as the old clickedCard
+                // if yes means that the player confirmed his selection
+                if ( clickedCard.getUniqueID() == originalEntity.getUniqueID() ) {
+
+
+                    // get the card on top of the stack
+                    Card cardOnTopOfStack = cardManager.getCardStack().getLastCard();
+
+                    CardClickedAction cardClickedAction = originalEntity.getCardClickedAction(cardOnTopOfStack);
+                    System.out.println("Engine| card on top= " + cardOnTopOfStack);
+                    System.out.println( cardClickedAction.execute() );
+                }
+
+                // if the player wants to choose something else
+                // set the recently clicked card, or the orignal entity and set that as the clicked card
+                else if ( clickedCard.getUniqueID() != originalEntity.getUniqueID() ) {
+                    cardManager.setClickedCard(originalEntity);
+                }
                 
 
             }
