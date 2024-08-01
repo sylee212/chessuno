@@ -114,6 +114,9 @@ public class Engine {
         // get the clicked card if exist
         Card clickedCard = cardManager.getClickedCard();
 
+        // get the clicked chess piece if exist
+        ChessPiece clickedChessPiece = chessPieceManager.getClickedChessPiece();
+
         // get the current player
         Player player = playerManager.getCurrentPlayer();
         
@@ -158,29 +161,14 @@ public class Engine {
                     // get the card on top of the stack
                     Card cardOnTopOfStack = cardManager.getCardStack().getLastCard();
 
+                    // call for the cardClickedAction which the information will be filled out by the card class
                     CardClickedAction cardClickedAction = originalEntity.getCardClickedAction(cardOnTopOfStack);
                     //System.out.println("Engine| card on top= " + cardOnTopOfStack);
                     
                     boolean executeResult = cardClickedAction.execute();
                     //System.out.println( executeResult );
 
-                    // only remove the card if the card is a valid move
-                    if ( executeResult ) {
 
-                    // add the card onto the stack
-                    cardManager.getCardStack().addCardToStack(originalEntity);
-
-                    // remove the card from the card list
-                    //System.out.println("\nEngine | ORIGINAL " + "size = " + cardManager.getPlayerCards().get(Color.WHITE).size() + " | " + cardManager.getPlayerCards());
-
-                    // remove the card from the list 
-                    cardManager.removeSpecificCard(originalEntity);
-
-                    //System.out.println("\nEngine | AFTER " + "size = " + cardManager.getPlayerCards().get(Color.WHITE).size() + " | " + cardManager.getPlayerCards());
-
-                    // if we reach until here already, means the card has been confirmed
-                    cardManager.setIsClickedCardConfirmed(true);
-                    }
 
 
                 }
@@ -205,6 +193,40 @@ public class Engine {
             // set the UI 
             this.gameController.getGameInformationContainer().updateClickedChessPieceLabel(originalEntity.toString());
 
+            // only allow a click on the chess piece if a card has been played
+            // if there is no currently clicked chess piece and the clicked chess piece's color is the same as the player's color
+            if ( isCardPlayed == true && clickedChessPiece == null && chessPieceColor == playerColor ) {
+                
+                // ask the chessPieceManager to set this chessPiece as clicked chessPiece
+                chessPieceManager.setClickedChessPiece(originalEntity);
+
+            } else if ( isCardPlayed == true && clickedChessPiece != null && chessPieceColor == playerColor ) {
+
+                // check if the new clickedChessPiece is the same as the old clickedChessPiece and the clicked chess piece's color is the same as the player's color
+                // if yes means that the player drops the selection
+                if ( clickedChessPiece.getUniqueID() == originalEntity.getUniqueID() && clickedChessPiece.getColor() == originalEntity.getColor() ) {
+
+                    // set the clicked chess to null
+                    chessPieceManager.setClickedChessPiece(null);
+
+                    // reset the UI to nothing
+                    gameController.getGameInformationContainer().updateClickedChessPieceLabel("");
+                    
+                    
+                } 
+                // if the clicked chess piece is different and the color is the same, set that as clicked chess pieces
+                else if ( clickedChessPiece.getUniqueID() != originalEntity.getUniqueID() && clickedChessPiece.getColor() == originalEntity.getColor() ) {
+
+                    // set the new chess piece
+                    chessPieceManager.setClickedChessPiece(originalEntity);
+                }
+                // if the clicked chess piece is different and the color is different, means we are selecting that chess piece to attack
+                else if ( clickedChessPiece.getUniqueID() != originalEntity.getUniqueID() && clickedChessPiece.getColor() != originalEntity.getColor() ) {
+                    
+                    // create move action
+                    
+                }
+            }
 
             cardManager.setIsClickedCardConfirmed(false);
 
@@ -455,6 +477,14 @@ public class Engine {
         this.gameController = gameController;
 
     }
+
+    public CardManager getCardManager() {
+        return cardManager;
+    }
+
+    public void setCardManager(CardManager cardManager) {
+        this.cardManager = cardManager;
+    }   
 
 
 

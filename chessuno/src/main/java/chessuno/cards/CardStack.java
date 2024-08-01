@@ -41,6 +41,8 @@ public class CardStack {
 
     public void addCardToStack(Card card) {
 
+        System.out.println("CardStack| addCardToStack | card = " + card);
+
         // add the card to the arrayList
         getCardStackList().add(card);
 
