@@ -120,6 +120,10 @@ public class Engine {
         // get the player color
         Color playerColor = player.getColor();       
 
+        // check if a card has been played
+        // if a card has been played, then the player can not play another card
+        boolean isCardPlayed = cardManager.isClickedCardConfirmed();
+
 
 
         // if the click type is card
@@ -138,13 +142,13 @@ public class Engine {
             // if the clicked card is null and the card's color is the same as the player's color
             // means this card is put onto a pending state as it may be a valid move 
             // NOT SURE IF THIS CARD IS VALID OR NOT YET. CHECK LATER 
-            if ( clickedCard == null && cardChessPieceColor == playerColor ) {
+            if ( isCardPlayed == false && clickedCard == null && cardChessPieceColor == playerColor ) {
                 
                 // ask the cardManager to set this card as clicked Card
                 cardManager.setClickedCard(originalEntity);
             } 
             // if the there is already a card, means the player could be confirming his choice to play this card
-            else if ( clickedCard != null && cardChessPieceColor == playerColor ) {
+            else if ( isCardPlayed == false && clickedCard != null && cardChessPieceColor == playerColor ) {
                 
                 // check if the new clickedCard is the same as the old clickedCard
                 // if yes means that the player confirmed his selection
@@ -173,6 +177,9 @@ public class Engine {
                     cardManager.removeSpecificCard(originalEntity);
 
                     //System.out.println("\nEngine | AFTER " + "size = " + cardManager.getPlayerCards().get(Color.WHITE).size() + " | " + cardManager.getPlayerCards());
+
+                    // if we reach until here already, means the card has been confirmed
+                    cardManager.setIsClickedCardConfirmed(true);
                     }
 
 
@@ -192,7 +199,18 @@ public class Engine {
             ChessPiece originalEntity = (ChessPiece)entity.getOriginal();
             System.out.println("Engine| original entity = " + originalEntity);
 
+            // get the color of the chessPiece
+            Color chessPieceColor = originalEntity.getColor();
+
+            // set the UI 
+            this.gameController.getGameInformationContainer().updateClickedChessPieceLabel(originalEntity.toString());
+
+
+            cardManager.setIsClickedCardConfirmed(false);
+
         } else if ( clickType == ClickType.TILE ) {
+
+            // maybe for this we can leave it be first // or we can use this as like after we click on the chess piece, this is used to determine where to go
 
             Tile originalEntity = (Tile)entity.getOriginal();
             System.out.println("Engine| original entity = " + originalEntity);

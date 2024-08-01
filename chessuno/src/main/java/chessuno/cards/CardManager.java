@@ -21,6 +21,8 @@ public class CardManager {
 
     private Card clickedCard;
 
+    private boolean isClickedCardConfirmed;
+
     
 
     
@@ -45,6 +47,9 @@ public class CardManager {
 
         // add the first card to the cardStack
         getCardStack().addCardToStack(firstCard );
+
+        // initialize the isClickedCardConfirmed
+        setIsClickedCardConfirmed(false);
     }   
 
     public static CardManager getInstance() {
@@ -171,6 +176,21 @@ public class CardManager {
         getPlayerCards().get(chessPieceColor).add(card);
 
         return card;
+    }
+
+
+    /**
+     * @return boolean return the isClickedCardConfirmed
+     */
+    public boolean isClickedCardConfirmed() {
+        return isClickedCardConfirmed;
+    }
+
+    /**
+     * @param isClickedCardConfirmed the isClickedCardConfirmed to set
+     */
+    public void setIsClickedCardConfirmed(boolean isClickedCardConfirmed) {
+        this.isClickedCardConfirmed = isClickedCardConfirmed;
     }
 
 }
