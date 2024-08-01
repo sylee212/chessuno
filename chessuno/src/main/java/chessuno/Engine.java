@@ -16,6 +16,7 @@ import chessuno.tiles.TileManager;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -57,6 +58,9 @@ public class Engine {
     // stores the values of the users screen and width
     private double maxScreenWidth;
     private double maxScreenHeight;
+
+    // the game controller
+    private GameController gameController;
 
     public static Engine getInstance() {
 
@@ -128,6 +132,9 @@ public class Engine {
             // get the color of the chessPiece on the card
             Color cardChessPieceColor = originalEntity.getChessPieceColor();
 
+            // set the UI
+            this.gameController.getGameInformationContainer().updateClickedCardLabel(originalEntity.toString());
+
             // if the clicked card is null and the card's color is the same as the player's color
             // means this card is put onto a pending state as it may be a valid move 
             // NOT SURE IF THIS CARD IS VALID OR NOT YET. CHECK LATER 
@@ -150,6 +157,8 @@ public class Engine {
                     CardClickedAction cardClickedAction = originalEntity.getCardClickedAction(cardOnTopOfStack);
                     System.out.println("Engine| card on top= " + cardOnTopOfStack);
                     System.out.println( cardClickedAction.execute() );
+
+
                 }
 
                 // if the player wants to choose something else
@@ -181,6 +190,21 @@ public class Engine {
 
 
     }
+
+    public GameController getGameController(){
+        // get the fxml. COMPULSORY
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/chessuno/game.fxml"));
+
+        try {
+        // load the FXML. COMPULSORY
+        Pane root = loader.load();
+        } 
+        catch (IOException e) {
+        e.printStackTrace();
+        }
+
+        return loader.getController();
+    }
     
 
 
@@ -200,6 +224,7 @@ public class Engine {
 
             // create the cards 
             ArrayList<Card> cards = cardManager.initializeCards(color);
+            //System.out.println("ENGINE | created players cards = " + cards);
 
             // assign the cards to the player
             player.setCards(cards);
@@ -281,9 +306,12 @@ public class Engine {
         // required because need to create the cards 
         setPlayerCards();
 
-        System.out.println("engine informed");
+        System.out.println("ENGINE | created players cards");
 
         Engine.isRegisterSceneChange = b;
+
+        // set the gameController
+        setGameController(getGameController());
     }
 
     public boolean getIsRegisterSceneChange() {
@@ -374,6 +402,12 @@ public class Engine {
 
         // Show the stage
         stage.show();
+
+    }
+
+    public void setGameController(GameController gameController) {
+
+        this.gameController = gameController;
 
     }
 

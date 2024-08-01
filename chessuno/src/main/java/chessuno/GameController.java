@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import chessuno.player.PlayerManager;
 import chessuno.uiContainer.CardContainer;
 import chessuno.uiContainer.ChessBoardContainer;
+import chessuno.uiContainer.GameInformationContainer;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -19,7 +20,7 @@ public class GameController {
     private double maxScreenHeight;
 
     // chess variables // 
-    private ChessBoardContainer chessBoard;
+    private ChessBoardContainer chessBoardContainer;
 
     // the chess board grid pane where all the pieces will be in 
     private GridPane chessBoardGridPane;
@@ -30,6 +31,10 @@ public class GameController {
     // creates the card AnchorPane 
     private AnchorPane cardAnchorPane;
 
+    // creteas the game information container
+    private GameInformationContainer gameInformationContainer;
+
+
     
 
     /**
@@ -38,8 +43,6 @@ public class GameController {
     @FXML
     private void initialize(){
 
-        System.out.println("this is who is first " + PlayerManager.getInstance().getClass());
-
         // store the size of the screen // 
         ArrayList<Double> screenSize = Engine.getScreenSize();
         maxScreenWidth = screenSize.get(0);
@@ -47,13 +50,13 @@ public class GameController {
 
         // set the chess contents // 
         // get the singleton for the chess board ui 
-        chessBoard = ChessBoardContainer.getInstance();
+        chessBoardContainer = ChessBoardContainer.getInstance();
 
         // assign the GridPane to the instance variable
-        setChessBoardGridPane(chessBoard.getChessBoardGridPane());
+        setChessBoardContainerGridPane(chessBoardContainer.getChessBoardGridPane());
 
         // add to anchorpane
-        GameAnchorPane.getChildren().add(getChessBoardGridPane());
+        GameAnchorPane.getChildren().add(getChessBoardContainerGridPane());
 
         // set the card contents // 
         // get the singleton for the card ui
@@ -65,6 +68,17 @@ public class GameController {
         // add to anchorpane
         GameAnchorPane.getChildren().add(getCardAnchorPane());
 
+        // set the game information contents // 
+        // get the singleton for the game information ui
+        gameInformationContainer = GameInformationContainer.getInstance();
+
+        // set the screen contents 
+        gameInformationContainer.updateCurrentPlayerLabel(PlayerManager.getInstance().getCurrentPlayer().getName());
+        gameInformationContainer.updateCurrentPlayerColorLabel("" + PlayerManager.getInstance().getCurrentPlayer().getColor());
+
+        // add to anchorPane
+        GameAnchorPane.getChildren().add(gameInformationContainer.getGameInformationGridPane());
+
         setScreenContentPositions();
 
         // used for testing
@@ -75,8 +89,8 @@ public class GameController {
         
         // for checking
         // System.out.println("GameController initialized");
-        // System.out.println("Cards");
-        // System.out.println( CardManager.getInstance().getPlayerCards() );
+        //System.out.println("Cards");
+        //System.out.println( CardManager.getInstance().getPlayerCards() );
         // System.out.println( "black ChessPieces");
         // System.out.println( ChessPieceManager.getInstance().getBlackChessPieceList() );
         // System.out.println( "white ChessPieces");
@@ -96,14 +110,14 @@ public class GameController {
         // ChatGPT
         // because we can only get the size of the gridpane after the gridpane is added to the anchorpane
         // Access the size of the GridPane after layout
-        getChessBoardGridPane().layoutBoundsProperty().addListener((obs, oldBounds, newBounds) -> {
+        getChessBoardContainerGridPane().layoutBoundsProperty().addListener((obs, oldBounds, newBounds) -> {
 
             // set chess board size //
-            double width = getChessBoardGridPane().getWidth();
-            double height = getChessBoardGridPane().getHeight();
+            double width = getChessBoardContainerGridPane().getWidth();
+            double height = getChessBoardContainerGridPane().getHeight();
 
-            chessBoard.setChessBoardGridPaneWidth( width);
-            chessBoard.setChessBoardGridPaneHeight( height);
+            chessBoardContainer.setChessBoardGridPaneWidth( width);
+            chessBoardContainer.setChessBoardGridPaneHeight( height);
 
             // set card board size // 
             double cardAnchorPaneWidth = getCardAnchorPane().getWidth();
@@ -114,16 +128,16 @@ public class GameController {
 
         });
 
-        System.out.println("GridPane width: " + chessBoard.getChessBoardGridPaneWidth());
-        System.out.println("GridPane height: " + chessBoard.getChessBoardGridPaneHeight());
+        System.out.println("GridPane width: " + chessBoardContainer.getChessBoardGridPaneWidth());
+        System.out.println("GridPane height: " + chessBoardContainer.getChessBoardGridPaneHeight());
 
         // set chess board location on UI //
         // the y coordinate might need to change
         double gridPaneX = 100;
         double gridPaneY = 100;
 
-        getChessBoardGridPane().setLayoutX(gridPaneX);
-        getChessBoardGridPane().setLayoutY(gridPaneY);
+        getChessBoardContainerGridPane().setLayoutX(gridPaneX);
+        getChessBoardContainerGridPane().setLayoutY(gridPaneY);
 
         // set the card board location on UI //
         // the y coordinate might need to change
@@ -190,12 +204,27 @@ public class GameController {
         this.maxScreenHeight = maxScreenHeight;
     }
 
-    public void setChessBoardGridPane(GridPane chessBoardGridPane) {
+    public void setChessBoardContainerGridPane(GridPane chessBoardGridPane) {
         this.chessBoardGridPane = chessBoardGridPane;
     }
 
-    public GridPane getChessBoardGridPane() {
+    public GridPane getChessBoardContainerGridPane() {
         return chessBoardGridPane;
+    }
+
+
+    /**
+     * @return GameInformationContainer return the gameInformationContainer
+     */
+    public GameInformationContainer getGameInformationContainer() {
+        return gameInformationContainer;
+    }
+
+    /**
+     * @param gameInformationContainer the gameInformationContainer to set
+     */
+    public void setGameInformationContainer(GameInformationContainer gameInformationContainer) {
+        this.gameInformationContainer = gameInformationContainer;
     }
 
 }

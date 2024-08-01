@@ -48,8 +48,7 @@ public class StartController {
     public void startNewGameButtonClicked() throws IOException{
         System.out.println("start button clicked");
 
-        // inform game Engine
-        Engine.getInstance().setIsStartSceneChange(true);
+
 
         // get the stage from the engine
         Stage stage = Engine.getInstance().getStage();
@@ -66,6 +65,9 @@ public class StartController {
 
         // Show the stage
         stage.show();
+
+        // inform game Engine
+        Engine.getInstance().setIsStartSceneChange(true);
     }
 
     private void setScreenContentPositions(){
