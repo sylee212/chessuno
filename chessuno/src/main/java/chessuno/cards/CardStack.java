@@ -2,12 +2,10 @@ package chessuno.cards;
 
 import java.util.ArrayList;
 
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 public class CardStack {
 
-    private AnchorPane cardStackAnchorPane;
 
     private GridPane cardStackGridPane;
 
@@ -16,8 +14,6 @@ public class CardStack {
     public CardStack() {
 
         // initialize the variables
-        setCardStackAnchorPane( new AnchorPane() );
-
         setCardStackGridPane( new GridPane() );
 
         setCardStackList( new ArrayList<Card>() );
@@ -27,15 +23,6 @@ public class CardStack {
         Card card = getCardStackList().get( getCardStackList().size() - 1 );
         return card;
     }
-
-
-    public AnchorPane getCardStackAnchorPane() {
-        return cardStackAnchorPane;
-    }
-
-    public void setCardStackAnchorPane(AnchorPane cardStackAnchorPane) {
-        this.cardStackAnchorPane = cardStackAnchorPane;
-    }   
 
 
     /**
