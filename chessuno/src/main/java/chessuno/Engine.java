@@ -155,8 +155,25 @@ public class Engine {
                     Card cardOnTopOfStack = cardManager.getCardStack().getLastCard();
 
                     CardClickedAction cardClickedAction = originalEntity.getCardClickedAction(cardOnTopOfStack);
-                    System.out.println("Engine| card on top= " + cardOnTopOfStack);
-                    System.out.println( cardClickedAction.execute() );
+                    //System.out.println("Engine| card on top= " + cardOnTopOfStack);
+                    
+                    boolean executeResult = cardClickedAction.execute();
+                    //System.out.println( executeResult );
+
+                    // only remove the card if the card is a valid move
+                    if ( executeResult ) {
+
+                    // add the card onto the stack
+                    cardManager.getCardStack().addCardToStack(originalEntity);
+
+                    // remove the card from the card list
+                    //System.out.println("\nEngine | ORIGINAL " + "size = " + cardManager.getPlayerCards().get(Color.WHITE).size() + " | " + cardManager.getPlayerCards());
+
+                    // remove the card from the list 
+                    cardManager.removeSpecificCard(originalEntity);
+
+                    //System.out.println("\nEngine | AFTER " + "size = " + cardManager.getPlayerCards().get(Color.WHITE).size() + " | " + cardManager.getPlayerCards());
+                    }
 
 
                 }

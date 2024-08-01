@@ -3,10 +3,13 @@ package chessuno.cards;
 import java.util.ArrayList;
 
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 
 public class CardStack {
 
     private AnchorPane cardStackAnchorPane;
+
+    private GridPane cardStackGridPane;
 
     private ArrayList<Card> cardStackList;
 
@@ -14,6 +17,8 @@ public class CardStack {
 
         // initialize the variables
         setCardStackAnchorPane( new AnchorPane() );
+
+        setCardStackGridPane( new GridPane() );
 
         setCardStackList( new ArrayList<Card>() );
     }
@@ -64,12 +69,27 @@ public class CardStack {
         if ( cardStackListSize > 0 ){
 
             // remove the card that is already on the UI
-            getCardStackAnchorPane().getChildren().remove( getCardStackList().get( cardStackListSize - 1 ).getCardStackPane() );
+            getCardStackGridPane().getChildren().remove( getCardStackList().get( cardStackListSize - 1 ).getCardStackPane() );
         }
 
         // add the card to the UI
-        getCardStackAnchorPane().getChildren().add( card.getCardStackPane() );
+        getCardStackGridPane().add( card.getCardStackPane() , 0 , 0);
 
+    }
+
+
+    /**
+     * @return GridPane return the cardStackGridPane
+     */
+    public GridPane getCardStackGridPane() {
+        return cardStackGridPane;
+    }
+
+    /**
+     * @param cardStackGridPane the cardStackGridPane to set
+     */
+    public void setCardStackGridPane(GridPane cardStackGridPane) {
+        this.cardStackGridPane = cardStackGridPane;
     }
 
 }

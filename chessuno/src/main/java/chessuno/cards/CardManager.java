@@ -157,4 +157,9 @@ public class CardManager {
         this.clickedCard = clickedCard;
     }
 
+    public void removeSpecificCard(Card card){
+
+        getPlayerCards().get(card.getChessPieceColor()).remove(card);
+    }
+
 }

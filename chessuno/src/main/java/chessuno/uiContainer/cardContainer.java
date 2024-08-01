@@ -154,7 +154,7 @@ public class CardContainer {
     private void setCardDeckInMiddle(){
 
         middleCardGridPane.add( cardManager.getCardDeck().getCardDeckStackPane() , 0 , 0 );
-        middleCardGridPane.add( cardManager.getCardStack().getCardStackAnchorPane(), 1, 0);
+        middleCardGridPane.add( cardManager.getCardStack().getCardStackGridPane(), 1, 0);
     }
 
     
