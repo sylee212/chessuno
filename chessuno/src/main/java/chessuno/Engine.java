@@ -202,6 +202,16 @@ public class Engine {
             CardDeck originalEntity = (CardDeck)entity.getOriginal();
             System.out.println("Engine| original entity = " + originalEntity);
 
+            System.out.println("\nEngine | ORIGINAL " + "size = " + cardManager.getPlayerCards().get(Color.WHITE).size() + " | " + cardManager.getPlayerCards());
+
+            // create a card and add it to the list
+            Card card = cardManager.createRandomCard(playerColor);
+
+            System.out.println("\nEngine | AFTER " + "size = " + cardManager.getPlayerCards().get(Color.WHITE).size() + " | " + cardManager.getPlayerCards());
+
+            // add the card to the UI
+            gameController.getCardContainer().addCardToPlayerStack(card);
+
         }
         
 

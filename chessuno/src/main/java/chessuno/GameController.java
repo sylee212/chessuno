@@ -34,6 +34,16 @@ public class GameController {
     // creteas the game information container
     private GameInformationContainer gameInformationContainer;
 
+    public CardContainer getCardContainer() {
+        return cardContainer;
+    }
+
+    public void setCardContainer(CardContainer cardContainer) {
+        this.cardContainer = cardContainer;
+    }
+
+    
+
 
     
 

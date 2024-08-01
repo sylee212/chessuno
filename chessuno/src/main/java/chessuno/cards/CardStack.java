@@ -48,6 +48,10 @@ public class CardStack {
         addCardToStackUI(card);
     }
 
+    /**
+     * Used to remove the card on the stack and add in a new card
+     * @param card
+     */
     private void addCardToStackUI(Card card) {
 
         int cardStackListSize = getCardStackList().size();
@@ -56,7 +60,7 @@ public class CardStack {
         if ( cardStackListSize > 0 ){
 
             // remove the card that is already on the UI
-            getCardStackGridPane().getChildren().remove( getCardStackList().get( cardStackListSize - 1 ).getCardStackPane() );
+            getCardStackGridPane().getChildren().remove( getCardStackList().get( cardStackListSize - 1).getCardStackPane() );
         }
 
         // add the card to the UI

@@ -162,4 +162,15 @@ public class CardManager {
         getPlayerCards().get(card.getChessPieceColor()).remove(card);
     }
 
+    public Card createRandomCard( Color chessPieceColor){
+
+        // create the card
+        Card card = cardFactory.createRandomCard(chessPieceColor);
+
+        // add the card to the list
+        getPlayerCards().get(chessPieceColor).add(card);
+
+        return card;
+    }
+
 }

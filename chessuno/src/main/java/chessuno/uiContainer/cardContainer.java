@@ -139,7 +139,7 @@ public class CardContainer {
                 
                 Card card = cardsList.get(x);
 
-                GridPane currentGridPane = card.getChessPieceColor() == Color.WHITE ? bottomCardGridPane : topCardGridPane;
+                GridPane currentGridPane = getGridPaneBasedOnColor(card.getChessPieceColor());
 
                 // add it at position column x and row 0 because we only need 1 row
                 currentGridPane.add( card.getCardStackPane() , x , 0 );
@@ -155,6 +155,25 @@ public class CardContainer {
 
         middleCardGridPane.add( cardManager.getCardDeck().getCardDeckStackPane() , 0 , 0 );
         middleCardGridPane.add( cardManager.getCardStack().getCardStackGridPane(), 1, 0);
+    }
+
+    public GridPane getGridPaneBasedOnColor(Color chessPieceColor) {
+        return  chessPieceColor == Color.WHITE ? this.bottomCardGridPane : this.topCardGridPane;
+    }
+
+    public void addCardToPlayerStack( Card card) {
+     
+        // get the card chess piece color
+        Color chessPieceColor = card.getChessPieceColor();
+
+        GridPane currentGridPane = getGridPaneBasedOnColor(chessPieceColor);
+
+        // get the index to add the card
+        // dont -1 
+        int index = cardManager.getPlayerCards().get(chessPieceColor).size();
+
+        // add the card
+        currentGridPane.add( card.getCardStackPane() , index , 0 );
     }
 
     
