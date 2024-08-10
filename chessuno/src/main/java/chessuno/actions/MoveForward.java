@@ -19,21 +19,25 @@ public class MoveForward extends MoveAction {
 
         GridPane chessGridPane = ChessBoardContainer.getInstance().getChessBoardGridPane();
 
-        if ( verifyRes == true ) {
-            // if a chess piece is clicked remove that chess piece
-            if ( isChessPieceClicked() == true ) {
+        System.out.println("clicked "+ getClickedChessPiece());
+        System.out.println("current "+ getCurrentChessPiece());
 
-                chessGridPane.getChildren().remove( getClickedChessPiece().getImageView() );
+        if ( verifyRes == true ) {
+
+            // if a chess piece is clicked remove that chess piece
+            if ( isCurrentChessPiece()== true ) {
+
+                chessGridPane.getChildren().remove( getCurrentChessPiece().getImageView() );
             }
 
             // remove the current chess piece at the current lcoation
-            chessGridPane.getChildren().remove( getCurrentChessPiece().getImageView() );
+            chessGridPane.getChildren().remove( getClickedChessPiece().getImageView() );
 
             // update the current chess piece location
-            getCurrentChessPiece().setChessLocation( getClickedLocation());
+            getClickedChessPiece().setChessLocation( getCurrentLocation() );
 
             // update the clicked chess piece UI 
-            chessGridPane.add( getCurrentChessPiece().getImageView(), getClickedLocation().getChessColumnCoordinate(), getClickedLocation().getChessRowCoordinate() );
+            chessGridPane.add( getClickedChessPiece().getImageView(), getCurrentLocation().getChessColumnCoordinate(), getCurrentLocation().getChessRowCoordinate() );
         }
 
         return verifyRes;
@@ -70,7 +74,7 @@ public class MoveForward extends MoveAction {
 
 
         // check if its a chesspiece that we clicked on 
-        if ( isChessPieceClicked() == true ) {
+        if ( isCurrentChessPiece() == true ) {
 
             // check if the clicked chess piece is same color or not
             // only valid if different color
@@ -80,7 +84,19 @@ public class MoveForward extends MoveAction {
 
             boolean rowCondition = ( currentRow + validRowFactor ) != clickedRow;
 
-            boolean colCondition = ( ( currentCol + 1 ) != clickedCol ) && ( ( currentCol - 1 ) != clickedCol );
+            boolean colCondition = ( ( currentCol + 1 ) != clickedCol ) || ( ( currentCol - 1 ) != clickedCol );
+
+            
+            // System.out.println("\n");
+            // System.out.println("MOVEFORWARD | rowCondition = " + rowCondition + " | colCondition = " + colCondition);
+            // System.out.println("current");
+            // System.out.println("row " +  ( currentRow + validRowFactor ) );
+            // System.out.println("col right " + (( currentCol + 1 )));
+            // System.out.println("col left " + (( currentCol - 1 ) ));
+            // System.out.println("clicked");
+            // System.out.println("row " + clickedRow);
+            // System.out.println("col " + clickedCol);
+
 
             // check if the row is valid
             // by using our row, and checking if the clicked row is the same after the addition of the factor

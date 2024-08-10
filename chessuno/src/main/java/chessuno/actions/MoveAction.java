@@ -18,7 +18,7 @@ public abstract class MoveAction extends ActionAbstract {
 
     private Tile clickedTile;
 
-    private boolean isChessPieceClicked;
+    private boolean isCurrentChessPiece;
 
     private boolean isClickedTile;
 
@@ -43,12 +43,12 @@ public abstract class MoveAction extends ActionAbstract {
         Tile clickedTile = actionInformation.gettileClicked();
 
         // set the variable to be true and only 
-        setIsChessPieceClicked(false);
+        setisCurrentChessPiece(false);
 
         setIsClickedTile(false);
 
         if ( clickedChessPiece != null ) {
-            setIsChessPieceClicked(true);
+            setisCurrentChessPiece(true);
             setClickedChessPiece(clickedChessPiece);
             setClickedLocation(clickedChessPiece.getChessLocation());
         }
@@ -159,17 +159,17 @@ public abstract class MoveAction extends ActionAbstract {
 
 
     /**
-     * @return boolean return the isChessPieceClicked
+     * @return boolean return the isCurrentChessPiece
      */
-    public boolean isChessPieceClicked() {
-        return isChessPieceClicked;
+    public boolean isCurrentChessPiece() {
+        return isCurrentChessPiece;
     }
 
     /**
-     * @param isChessPieceClicked the isChessPieceClicked to set
+     * @param isCurrentChessPiece the isCurrentChessPiece to set
      */
-    public void setIsChessPieceClicked(boolean isChessPieceClicked) {
-        this.isChessPieceClicked = isChessPieceClicked;
+    public void setisCurrentChessPiece(boolean isCurrentChessPiece) {
+        this.isCurrentChessPiece = isCurrentChessPiece;
     }
 
     /**

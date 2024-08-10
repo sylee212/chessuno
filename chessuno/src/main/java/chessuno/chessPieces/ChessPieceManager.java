@@ -26,13 +26,13 @@ public class ChessPieceManager {
         setBlackChessPieceList( chessPieceFactory.instantiateChessPieces( Color.BLACK ) );
         setWhiteChessPieceList( chessPieceFactory.instantiateChessPieces( Color.WHITE ) );
 
-        ///////// TEST ///////////
-        getBlackChessPieceList().add(chessPieceFactory.createSpecificChessPiece(Color.BLACK, ChessPieceType.PAWN));
-        getWhiteChessPieceList().add(chessPieceFactory.createSpecificChessPiece(Color.WHITE, ChessPieceType.PAWN));
-
         // set the locations
         setChessPieceLocations( getBlackChessPieceList(), true );
         setChessPieceLocations( getWhiteChessPieceList(), false );
+
+        ////////////// test  ///////////// error
+        createSpecificChessPiece(Color.BLACK, 5, 3, ChessPieceType.PAWN);
+        createSpecificChessPiece(Color.WHITE, 4, 4, ChessPieceType.PAWN);
     }
 
 

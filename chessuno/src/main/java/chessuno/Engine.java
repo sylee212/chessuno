@@ -185,14 +185,19 @@ public class Engine {
 
         } else if( clickType == ClickType.CHESSPIECE ) {
 
+
             ChessPiece originalEntity = (ChessPiece)entity.getOriginal();
             System.out.println("Engine| original entity = " + originalEntity);
+
 
             // get the color of the chessPiece
             Color chessPieceColor = originalEntity.getColor();
 
             // set the UI 
             this.gameController.getGameInformationContainer().updateClickedChessPieceLabel(originalEntity.toString());
+
+            // says here card played is false
+            System.out.println("Engine| isCardPlayed = " + ( isCardPlayed == true ) + " clickedChessPiece " +  ( clickedChessPiece != null ) + "| clickType = " + clickType);
 
             // only allow a click on the chess piece if a card has been played
             // if there is no currently clicked chess piece and the clicked chess piece's color is the same as the player's color
@@ -221,9 +226,15 @@ public class Engine {
                     // set the new chess piece
                     chessPieceManager.setClickedChessPiece(originalEntity);
                 }
+            }
+            // if a different color was selected, checked if the previous clicked chess piece was the same as the new clicked chess piece
+            else if ( isCardPlayed == true && clickedChessPiece != null && chessPieceColor != playerColor){
+                System.out.println("Engine| kill other chess piece, clicked chess piece = " + clickedChessPiece);
+
+
                 // if the clicked chess piece is different and the color is different, means we are selecting that chess piece to attack
-                else if ( clickedChessPiece.getUniqueID() != originalEntity.getUniqueID() && clickedChessPiece.getColor() != originalEntity.getColor() ) {
-                    
+                if ( clickedChessPiece.getUniqueID() != originalEntity.getUniqueID() && clickedChessPiece.getColor() != originalEntity.getColor() ) {
+    
                     // get the move action 
                     MoveAction moveAction = originalEntity.getMoveAction(clickedChessPiece);
 
@@ -237,13 +248,16 @@ public class Engine {
 
                         // set the UI 
                         this.gameController.getGameInformationContainer().updateClickedChessPieceLabel("");
+
+                        // set the card played to false ONLY IF WE HAVE SUCCESSFULLY MOVED THE PIECE
+                        cardManager.setIsClickedCardConfirmed(false);
                     }
 
                     
                 }
             }
 
-            cardManager.setIsClickedCardConfirmed(false);
+        
 
         } else if ( clickType == ClickType.TILE ) {
 
@@ -264,7 +278,7 @@ public class Engine {
                 MoveAction moveAction = clickedChessPiece.getMoveAction(originalEntity);
 
                 boolean executeResult = moveAction.execute();
-                
+
                 if ( executeResult == true ){
 
                     // remove the clicked chess piece
@@ -272,6 +286,9 @@ public class Engine {
 
                     // set the UI 
                     this.gameController.getGameInformationContainer().updateClickedChessPieceLabel("");
+
+                    // set the card played to false ONLY IF WE HAVE SUCCESSFULLY MOVED THE PIECE
+                    cardManager.setIsClickedCardConfirmed(false);
                 }
 
             }
