@@ -26,6 +26,10 @@ public class ChessPieceManager {
         setBlackChessPieceList( chessPieceFactory.instantiateChessPieces( Color.BLACK ) );
         setWhiteChessPieceList( chessPieceFactory.instantiateChessPieces( Color.WHITE ) );
 
+        ///////// TEST ///////////
+        getBlackChessPieceList().add(chessPieceFactory.createSpecificChessPiece(Color.BLACK, ChessPieceType.PAWN));
+        getWhiteChessPieceList().add(chessPieceFactory.createSpecificChessPiece(Color.WHITE, ChessPieceType.PAWN));
+
         // set the locations
         setChessPieceLocations( getBlackChessPieceList(), true );
         setChessPieceLocations( getWhiteChessPieceList(), false );
@@ -79,6 +83,9 @@ public class ChessPieceManager {
         } else {
             currentY += 1;
         }
+
+        // add an experimental pawn
+        
 
         // rook locations
         ArrayList<ChessLocation> rookChessLocation = new ArrayList<>();
@@ -140,6 +147,27 @@ public class ChessPieceManager {
             }
             
         }
+    }
+
+    public boolean createSpecificChessPiece( Color color, int x, int y , ChessPieceType chessPieceType ) {
+
+        // create the chess piece
+        ChessPiece chessPiece = chessPieceFactory.createSpecificChessPiece(color, chessPieceType);
+
+        // create the location
+        ChessLocation chessLocation = new ChessLocation(x, y);
+
+        // set the location
+        chessPiece.setChessLocation(chessLocation);
+
+        // add to the list based on the coolor
+        if ( color == Color.BLACK ) {
+            getBlackChessPieceList().add(chessPiece);
+        } else {
+            getWhiteChessPieceList().add(chessPiece);
+        }
+
+        return true;
     }
 
 

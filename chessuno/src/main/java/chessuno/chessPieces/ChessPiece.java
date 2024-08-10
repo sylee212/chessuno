@@ -6,6 +6,7 @@ import chessuno.Color;
 import chessuno.Engine;
 import chessuno.EntityClicked;
 import chessuno.SetClick;
+import chessuno.actions.MoveAction;
 import chessuno.tiles.Tile;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -55,6 +56,11 @@ public abstract class ChessPiece implements SetClick, EntityClicked{
         setClickType(clickType.CHESSPIECE);
 
     }
+
+    // the function that must be implemented by each of the subclasses
+    public abstract MoveAction getMoveAction(ChessPiece chessPiece);
+
+    public abstract MoveAction getMoveAction(Tile tile);
 
     /**
      * @return String return the chessPieceType

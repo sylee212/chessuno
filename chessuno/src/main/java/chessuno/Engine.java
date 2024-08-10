@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import chessuno.actions.CardClickedAction;
+import chessuno.actions.MoveAction;
 import chessuno.cards.Card;
 import chessuno.cards.CardDeck;
 import chessuno.cards.CardManager;
@@ -223,7 +224,21 @@ public class Engine {
                 // if the clicked chess piece is different and the color is different, means we are selecting that chess piece to attack
                 else if ( clickedChessPiece.getUniqueID() != originalEntity.getUniqueID() && clickedChessPiece.getColor() != originalEntity.getColor() ) {
                     
-                    // create move action
+                    // get the move action 
+                    MoveAction moveAction = originalEntity.getMoveAction(clickedChessPiece);
+
+                    // execute the move action
+                    boolean executeResult = moveAction.execute();
+
+                    if ( executeResult == true ){
+
+                        // remove the clicked chess piece
+                        chessPieceManager.setClickedChessPiece(null);
+
+                        // set the UI 
+                        this.gameController.getGameInformationContainer().updateClickedChessPieceLabel("");
+                    }
+
                     
                 }
             }
@@ -236,6 +251,30 @@ public class Engine {
 
             Tile originalEntity = (Tile)entity.getOriginal();
             System.out.println("Engine| original entity = " + originalEntity);
+
+            // set the UI 
+            this.gameController.getGameInformationContainer().updateClickedTileLabel(originalEntity.toString());
+
+            // only allow a click on the tile if a chessPiece has been clicked
+            if ( clickedChessPiece != null ) {
+                
+                // set the tileManager to the clicked tile
+                tileManager.setClickedTile(originalEntity);
+
+                MoveAction moveAction = clickedChessPiece.getMoveAction(originalEntity);
+
+                boolean executeResult = moveAction.execute();
+                
+                if ( executeResult == true ){
+
+                    // remove the clicked chess piece
+                    chessPieceManager.setClickedChessPiece(null);
+
+                    // set the UI 
+                    this.gameController.getGameInformationContainer().updateClickedChessPieceLabel("");
+                }
+
+            }
 
         } else if ( clickType == ClickType.DECK ) {
 

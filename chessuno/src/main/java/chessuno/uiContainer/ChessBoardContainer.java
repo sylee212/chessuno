@@ -83,11 +83,9 @@ public class ChessBoardContainer {
 
         ArrayList<ChessPiece> whiteChessPieceList = ChessPieceManager.getInstance().getWhiteChessPieceList();
 
-        int listMinSize = Math.min(blackChessPieceList.size(), whiteChessPieceList.size());
-
 
         /////////// PENDING ////////////////////// need to add the pieces connection to the tiles
-        for ( int i = 0 ; i < listMinSize ; i++ ){
+        for ( int i = 0 ; i < blackChessPieceList.size() ; i++ ){
         
             // get the black chess piece
             ChessPiece blackChessPiece = blackChessPieceList.get(i);    
@@ -98,6 +96,9 @@ public class ChessBoardContainer {
 
             // add the black chess piece to the gridpane
             chessBoardGridPane.add(blackChessPiece.getImageView(), blackCol, blackRow);
+        }
+
+        for ( int i = 0 ; i < whiteChessPieceList.size() ; i++ ){
 
             // get the white chess piece
             ChessPiece whiteChessPiece = whiteChessPieceList.get(i);

@@ -127,4 +127,43 @@ public class ChessPieceFactory {
         this.uniqueID = uniqueID;
     }
 
+    public ChessPiece createSpecificChessPiece(Color color, ChessPieceType chessPieceType) {
+
+        // get the unique ID
+        int uniqueID = getUniqueID();
+
+        // create the specific chess piece
+        ChessPiece chessPiece = null;
+        switch (chessPieceType) {
+            case KING:
+                chessPiece = new King(uniqueID, color);
+                break;
+
+            case QUEEN:
+                chessPiece = new Queen(uniqueID, color);
+                break;
+            case BISHOP:
+                chessPiece = new Bishop(uniqueID, color);
+                break;
+            case KNIGHT:
+                chessPiece = new Knight(uniqueID, color);   
+                break;
+            case ROOK:
+                chessPiece = new Rook(uniqueID, color);
+                break;
+            case PAWN:
+                chessPiece = new Pawn(uniqueID, color);
+                break;
+
+            default:
+                break;
+        }
+
+        // increment the unique ID
+        setUniqueID(uniqueID + 1);
+
+
+        return chessPiece;
+    }
+
 }

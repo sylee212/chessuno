@@ -2,6 +2,7 @@ package chessuno.actions;
 
 import chessuno.ChessLocation;
 import chessuno.chessPieces.ChessPiece;
+import chessuno.tiles.Tile;
 
 public abstract class MoveAction extends ActionAbstract {
 
@@ -13,26 +14,59 @@ public abstract class MoveAction extends ActionAbstract {
 
     private ChessLocation clickedLocation;
 
+    private Tile currentTile;
+
+    private Tile clickedTile;
+
+    private boolean isChessPieceClicked;
+
+    private boolean isClickedTile;
+
     public MoveAction() {
         super();
     }
 
     @Override
-    public boolean execute() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'execute'");
-    }
+    public abstract boolean execute();
 
     @Override
     public abstract boolean verify();
 
     @Override
     public void fillInformation(ActionInformation actionInformation) {
-        setClickedChessPiece(actionInformation.getchessPieceClicked());
+        // this part is because sometimes the newly clicked content can be a chessPiece or Tile
+
+        // check the newly clicked chess piece 
+        ChessPiece clickedChessPiece = actionInformation.getchessPieceClicked();
+
+        // get the clicked tile
+        Tile clickedTile = actionInformation.gettileClicked();
+
+        // set the variable to be true and only 
+        setIsChessPieceClicked(false);
+
+        setIsClickedTile(false);
+
+        if ( clickedChessPiece != null ) {
+            setIsChessPieceClicked(true);
+            setClickedChessPiece(clickedChessPiece);
+            setClickedLocation(clickedChessPiece.getChessLocation());
+        }
+
+        if ( clickedTile != null ) {
+            setIsClickedTile(true);
+            setClickedTile(clickedTile);
+            setClickedLocation(clickedTile.getChessLocation());
+        }
+
+
+
+        // set the current Chess Piece 
         setCurrentChessPiece(actionInformation.getCurrentChessPiece());
-        setClickedLocation(getClickedChessPiece().getChessLocation());
         setCurrentLocation(getCurrentChessPiece().getChessLocation());
     }
+
+
 
     
 
@@ -91,6 +125,65 @@ public abstract class MoveAction extends ActionAbstract {
      */
     public void setClickedLocation(ChessLocation clickedLocation) {
         this.clickedLocation = clickedLocation;
+    }
+
+
+
+    /**
+     * @return Tile return the currentTile
+     */
+    public Tile getCurrentTile() {
+        return currentTile;
+    }
+
+    /**
+     * @param currentTile the currentTile to set
+     */
+    public void setCurrentTile(Tile currentTile) {
+        this.currentTile = currentTile;
+    }
+
+    /**
+     * @return Tile return the clickedTile
+     */
+    public Tile getClickedTile() {
+        return clickedTile;
+    }
+
+    /**
+     * @param clickedTile the clickedTile to set
+     */
+    public void setClickedTile(Tile clickedTile) {
+        this.clickedTile = clickedTile;
+    }
+
+
+    /**
+     * @return boolean return the isChessPieceClicked
+     */
+    public boolean isChessPieceClicked() {
+        return isChessPieceClicked;
+    }
+
+    /**
+     * @param isChessPieceClicked the isChessPieceClicked to set
+     */
+    public void setIsChessPieceClicked(boolean isChessPieceClicked) {
+        this.isChessPieceClicked = isChessPieceClicked;
+    }
+
+    /**
+     * @return boolean return the isClickedTile
+     */
+    public boolean isClickedTile() {
+        return isClickedTile;
+    }
+
+    /**
+     * @param isClickedTile the isClickedTile to set
+     */
+    public void setIsClickedTile(boolean isClickedTile) {
+        this.isClickedTile = isClickedTile;
     }
 
 }

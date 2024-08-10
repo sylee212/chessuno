@@ -29,6 +29,9 @@ public class GameInformationContainer {
     private Label clickedCardLabel;
     private String clickedCardLabelPrefix;
 
+    private Label clickedTileLabel;
+    private String clickedTilePrefix;
+
     public static GameInformationContainer getInstance() {
         if ( GameInformationContainer.gameInformationContainer == null ) {
             GameInformationContainer.gameInformationContainer = new GameInformationContainer();
@@ -45,12 +48,14 @@ public class GameInformationContainer {
         setCurrentPlayerColorLabelPrefix("Current Player color: ");
         setClickedChessPieceLabelPrefix("Clicked Chess Piece: ");
         setClickedCardLabelPrefix("Clicked Card: ");
+        setClickedTilePrefix("Clicked Tile: ");
 
         // initialize the Labels
         setCurrentPlayerLabel(new Label(getCurrentPlayerLabelPrefix()));
         setCurrentPlayerColorLabel(new Label(getCurrentPlayerColorLabelPrefix()));
         setClickedChessPieceLabel(new Label(getClickedChessPieceLabelPrefix()));
         setClickedCardLabel(new Label(getClickedCardLabelPrefix()));
+        setClickedTileLabel(new Label(getClickedTilePrefix()));
 
         // initialize the GridPane
         setGameInformationGridPane(new GridPane());
@@ -71,6 +76,7 @@ public class GameInformationContainer {
         getGameInformationGridPane().add(getCurrentPlayerColorLabel(), 0, 1);
         getGameInformationGridPane().add(getClickedChessPieceLabel(), 0, 2);
         getGameInformationGridPane().add(getClickedCardLabel(), 0, 3);
+        getGameInformationGridPane().add(getClickedTileLabel(), 0, 4);
 
     }
 
@@ -92,6 +98,11 @@ public class GameInformationContainer {
     public void updateClickedCardLabel(String text) {
 
         getClickedCardLabel().setText(getClickedCardLabelPrefix() + text);
+    }
+
+    public void updateClickedTileLabel(String text) {
+
+        getClickedTileLabel().setText(getClickedTilePrefix() + text);
     }
 
 
@@ -278,6 +289,35 @@ public class GameInformationContainer {
      */
     public void setGameInformationGridPaneY(double gameInformationGridPaneY) {
         this.gameInformationGridPaneY = gameInformationGridPaneY;
+    }
+
+
+    /**
+     * @return Label return the clickedTileLabel
+     */
+    public Label getClickedTileLabel() {
+        return clickedTileLabel;
+    }
+
+    /**
+     * @param clickedTileLabel the clickedTileLabel to set
+     */
+    public void setClickedTileLabel(Label clickedTileLabel) {
+        this.clickedTileLabel = clickedTileLabel;
+    }
+
+    /**
+     * @return String return the clickedTilePrefix
+     */
+    public String getClickedTilePrefix() {
+        return clickedTilePrefix;
+    }
+
+    /**
+     * @param clickedTilePrefix the clickedTilePrefix to set
+     */
+    public void setClickedTilePrefix(String clickedTilePrefix) {
+        this.clickedTilePrefix = clickedTilePrefix;
     }
 
 }

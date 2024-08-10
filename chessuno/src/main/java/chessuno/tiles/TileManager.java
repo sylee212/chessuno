@@ -8,6 +8,8 @@ public class TileManager {
 
     private static TileManager tileManager;
 
+    private Tile clickedTile;
+
     // create a list of all the tiles in the format of a grid
     private ArrayList<ArrayList<Tile> > tileListGridForm;
 
@@ -78,6 +80,21 @@ public class TileManager {
 
 
         return tileListGridForm;
+    }
+
+
+    /**
+     * @return Tile return the clickedTile
+     */
+    public Tile getClickedTile() {
+        return clickedTile;
+    }
+
+    /**
+     * @param clickedTile the clickedTile to set
+     */
+    public void setClickedTile(Tile clickedTile) {
+        this.clickedTile = clickedTile;
     }
 
 }
