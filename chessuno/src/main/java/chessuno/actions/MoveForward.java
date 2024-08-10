@@ -30,6 +30,8 @@ public class MoveForward extends MoveAction {
                 chessGridPane.getChildren().remove( getCurrentChessPiece().getImageView() );
             }
 
+
+            ///////////////////// issues is here when clicking on tile after klilling a pawn
             // remove the current chess piece at the current lcoation
             chessGridPane.getChildren().remove( getClickedChessPiece().getImageView() );
 
