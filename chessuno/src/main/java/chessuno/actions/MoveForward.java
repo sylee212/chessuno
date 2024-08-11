@@ -31,7 +31,7 @@ public class MoveForward extends MoveAction {
                 //System.out.println("\nMoveForward killed a piece, before black list size " + ChessPieceManager.getInstance().getBlackChessPieceList().size());
                 //System.out.println("\nMoveForward killed a piece, before white list size " + ChessPieceManager.getInstance().getWhiteChessPieceList().size());
 
-                // remove all the data about the second clicked chess piece
+                // remove all the data about the second clicked chess piece // 
                 // remove the second piece clicked chess piece
                 ChessPieceManager.getInstance().deleteSpecificChessPiece( getSecondClickedChessPiece().getColor(), getSecondClickedChessPiece() );
 
@@ -43,7 +43,7 @@ public class MoveForward extends MoveAction {
                 //System.out.println("\nMoveForward killed a piece, after white list size " + ChessPieceManager.getInstance().getWhiteChessPieceList().size());
 
 
-
+                // update the first chess piece data // 
                 // remove the first piece clicked chess piece
                 chessGridPane.getChildren().remove( getFirstClickedChessPiece().getImageView() );
 
