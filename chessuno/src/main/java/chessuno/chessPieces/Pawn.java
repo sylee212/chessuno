@@ -41,8 +41,11 @@ public class Pawn extends ChessPiece {
         ActionInformation actionInformation = new ActionInformation();
 
         // fill the information
-        actionInformation.setCurrentChessPiece(this);
-        actionInformation.setchessPieceClicked(chessPiece);
+        // set this clicked chess piece as the second
+        actionInformation.setSecondClickedChessPiece(this);
+
+        // set the first clicked from the parameter
+        actionInformation.setFirstClickedChessPiece(chessPiece);
 
         // fill in the action information to the moveForward action
         moveForward.fillInformation(actionInformation);
@@ -61,8 +64,12 @@ public class Pawn extends ChessPiece {
         ActionInformation actionInformation = new ActionInformation();
 
         // fill the information
-        actionInformation.setCurrentChessPiece(this);
-        actionInformation.settileClicked(tile);
+        // why if it's a tile, we set the first clicked to be this chess piece? 
+        // cause the second clicked will be a tile
+        actionInformation.setFirstClickedChessPiece(this);
+
+        // set the tile to be a first clicked
+        actionInformation.setfirstClickedTile(tile);
 
         // fill in the action information to the moveForward action
         moveForward.fillInformation(actionInformation);

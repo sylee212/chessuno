@@ -128,6 +128,8 @@ public class Engine {
         // if a card has been played, then the player can not play another card
         boolean isCardPlayed = cardManager.isClickedCardConfirmed();
 
+        System.out.println("###### Engine| clickedChessPiece = " + clickedChessPiece + "| entity = " + entity   );
+
 
 
         // if the click type is card

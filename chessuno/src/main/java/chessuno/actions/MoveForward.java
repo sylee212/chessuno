@@ -19,27 +19,43 @@ public class MoveForward extends MoveAction {
 
         GridPane chessGridPane = ChessBoardContainer.getInstance().getChessBoardGridPane();
 
-        System.out.println("clicked "+ getClickedChessPiece());
-        System.out.println("current "+ getCurrentChessPiece());
+        System.out.println("first clicked "+ getFirstClickedChessPiece());
+        System.out.println("second clicked "+ getSecondClickedChessPiece());
+        System.out.println("isClickedTile "+ isClickedTile());
 
         if ( verifyRes == true ) {
 
-            // if a chess piece is clicked remove that chess piece
-            if ( isCurrentChessPiece()== true ) {
+            // if the second click is a chess piece, remove the image view
+            if ( isClickedChessPiece()== true ) {
 
-                chessGridPane.getChildren().remove( getCurrentChessPiece().getImageView() );
+                chessGridPane.getChildren().remove( getSecondClickedChessPiece().getImageView() );
+
+                // remove the first piece clicked chess piece
+                chessGridPane.getChildren().remove( getFirstClickedChessPiece().getImageView() );
+
+                // update the current chess piece location
+                getFirstClickedChessPiece().setChessLocation( getSecondClickedChessPieceLocation() );
+
+                // update the clicked chess piece UI 
+                chessGridPane.add( getFirstClickedChessPiece().getImageView(), getFirstClickedChessPiece().getChessLocation().getChessColumnCoordinate(),  getFirstClickedChessPiece().getChessLocation().getChessRowCoordinate() );
+            } 
+            else if ( isClickedTile() == true ){
+
+                ///////////////////// issues is here when clicking on tile after klilling a pawn
+                // remove the first piece clicked chess piece
+                chessGridPane.getChildren().remove( getFirstClickedChessPiece().getImageView() );
+
+                // update the current chess piece location
+                getFirstClickedChessPiece().setChessLocation( getFirstClickedTile().getChessLocation() );
+
+                // update the clicked chess piece UI 
+                chessGridPane.add( getFirstClickedChessPiece().getImageView(), getFirstClickedChessPiece().getChessLocation().getChessColumnCoordinate(),  getFirstClickedChessPiece().getChessLocation().getChessRowCoordinate() );
+
+                System.out.println("MOVEFORWARD | execute | tile clicked and execute " );
             }
 
 
-            ///////////////////// issues is here when clicking on tile after klilling a pawn
-            // remove the current chess piece at the current lcoation
-            chessGridPane.getChildren().remove( getClickedChessPiece().getImageView() );
 
-            // update the current chess piece location
-            getClickedChessPiece().setChessLocation( getCurrentLocation() );
-
-            // update the clicked chess piece UI 
-            chessGridPane.add( getClickedChessPiece().getImageView(), getCurrentLocation().getChessColumnCoordinate(), getCurrentLocation().getChessRowCoordinate() );
         }
 
         return verifyRes;
@@ -49,13 +65,9 @@ public class MoveForward extends MoveAction {
     public boolean verify() {
         boolean res = true;
 
-        // get the location of the clicked tile or chess piece
-        int clickedCol = getClickedLocation().getChessColumnCoordinate();
-        int clickedRow = getClickedLocation().getChessRowCoordinate();
-
-        // get the location of the current tile or chess piece
-        int currentCol = getCurrentLocation().getChessColumnCoordinate();
-        int currentRow = getCurrentLocation().getChessRowCoordinate();
+        // get the location of the clicked chess piece
+        int firstClickedChessPieceCol = getFirstClickedChessPieceLocation().getChessColumnCoordinate();
+        int firstClickedChessPieceRow = getFirstClickedChessPieceLocation().getChessRowCoordinate();
 
         // check if its a clicked tile that we clicked on, check if the coordinate is valid or not
         int validRowFactor = 1;
@@ -69,35 +81,44 @@ public class MoveForward extends MoveAction {
         // if not same, then it is not possible to move forward
         if ( isClickedTile() == true ) {
 
-            if ( clickedCol != currentCol ) {
+            // get the location of the current tile 
+            int firstClickedTileCol = getFirstClickedTile().getChessLocation().getChessColumnCoordinate();
+            int firstClickedTileRow = getFirstClickedTile().getChessLocation().getChessRowCoordinate();
+
+            // if we clicked a tile, and the tile is on a different column, invalid move
+            if ( firstClickedChessPieceCol != firstClickedTileCol ) {
                 res = false;
             }
         }
 
 
         // check if its a chesspiece that we clicked on 
-        if ( isCurrentChessPiece() == true ) {
+        if ( isClickedChessPiece() == true ) {
+
+            // get the location of the current tile or chess piece
+            int secondClickedChessPieceCol = getSecondClickedChessPieceLocation().getChessColumnCoordinate();
+            int secondClickedChessPieceRow = getSecondClickedChessPieceLocation().getChessRowCoordinate();
 
             // check if the clicked chess piece is same color or not
             // only valid if different color
-            if ( getClickedChessPiece().getColor() == getCurrentChessPiece().getColor() ) {
+            if ( getSecondClickedChessPiece().getColor() == getFirstClickedChessPiece().getColor() ) {
                 res = false;
             }
 
-            boolean rowCondition = ( currentRow + validRowFactor ) != clickedRow;
+            boolean rowCondition = ( secondClickedChessPieceRow + validRowFactor ) != firstClickedChessPieceRow;
 
-            boolean colCondition = ( ( currentCol + 1 ) != clickedCol ) || ( ( currentCol - 1 ) != clickedCol );
+            boolean colCondition = ( ( secondClickedChessPieceCol + 1 ) != firstClickedChessPieceCol ) || ( ( secondClickedChessPieceCol - 1 ) != firstClickedChessPieceCol );
 
             
             // System.out.println("\n");
             // System.out.println("MOVEFORWARD | rowCondition = " + rowCondition + " | colCondition = " + colCondition);
             // System.out.println("current");
-            // System.out.println("row " +  ( currentRow + validRowFactor ) );
-            // System.out.println("col right " + (( currentCol + 1 )));
-            // System.out.println("col left " + (( currentCol - 1 ) ));
+            // System.out.println("row " +  ( secondClickedChessPieceRow + validRowFactor ) );
+            // System.out.println("col right " + (( secondClickedChessPieceCol + 1 )));
+            // System.out.println("col left " + (( secondClickedChessPieceCol - 1 ) ));
             // System.out.println("clicked");
-            // System.out.println("row " + clickedRow);
-            // System.out.println("col " + clickedCol);
+            // System.out.println("row " + firstClickedChessPieceRow);
+            // System.out.println("col " + firstClickedChessPieceCol);
 
 
             // check if the row is valid
@@ -117,8 +138,10 @@ public class MoveForward extends MoveAction {
     public boolean isUpForward(){
         boolean res = true;
 
-        // if the color is black, means we are going down, so going down is forward not going up 
-        if (getCurrentChessPiece().getColor() == Color.BLACK) {
+        // checks if the first clicked chess piece is black or white
+        // if its black, means we are going down
+        // so dwon is forward
+        if (getFirstClickedChessPiece().getColor() == Color.BLACK) {
             res = false;
         }
         return res;

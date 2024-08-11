@@ -63,7 +63,7 @@ public class GameInformationContainer {
         setGameInformationGridPaneWidth(1000);
         setGameInformationGridPaneHeight(200);
         setGameInformationGridPaneX(0);
-        setGameInformationGridPaneY(0);
+        setGameInformationGridPaneY(600);
 
         // set the properties
         getGameInformationGridPane().setPrefWidth(getGameInformationGridPaneWidth());

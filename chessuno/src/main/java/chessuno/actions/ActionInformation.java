@@ -6,13 +6,13 @@ import chessuno.tiles.Tile;
 
 public class ActionInformation {
 
-    private Tile tileClicked;
+    private Tile firstClickedTile;
 
-    private Tile currentTile;
+    private Tile secondClickedTile;
 
-    private ChessPiece chessPieceClicked;
+    private ChessPiece firstClickedChessPiece;
 
-    private ChessPiece currentChessPiece;
+    private ChessPiece secondClickedChessPiece;
 
     private Card cardClicked;
 
@@ -24,57 +24,57 @@ public class ActionInformation {
     /**
      * @return Tile return the tileClicked
      */
-    public Tile gettileClicked() {
-        return tileClicked;
+    public Tile getfirstClickedTile() {
+        return firstClickedTile;
     }
 
     /**
      * @param tileClicked the tileClicked to set
      */
-    public void settileClicked(Tile tileClicked) {
-        this.tileClicked = tileClicked;
+    public void setfirstClickedTile(Tile tileClicked) {
+        this.firstClickedTile = tileClicked;
     }
 
     /**
      * @return Tile return the currentTile
      */
-    public Tile getCurrentTile() {
-        return currentTile;
+    public Tile getSecondClickedTile() {
+        return secondClickedTile;
     }
 
     /**
      * @param currentTile the currentTile to set
      */
-    public void setCurrentTile(Tile currentTile) {
-        this.currentTile = currentTile;
+    public void setSecondClickedTile(Tile currentTile) {
+        this.secondClickedTile = currentTile;
     }
 
     /**
      * @return ChessPiece return the chessPieceClicked
      */
-    public ChessPiece getchessPieceClicked() {
-        return chessPieceClicked;
+    public ChessPiece getFirstClickedChessPiece() {
+        return firstClickedChessPiece;
     }
 
     /**
      * @param chessPieceClicked the chessPieceClicked to set
      */
-    public void setchessPieceClicked(ChessPiece chessPieceClicked) {
-        this.chessPieceClicked = chessPieceClicked;
+    public void setFirstClickedChessPiece(ChessPiece chessPieceClicked) {
+        this.firstClickedChessPiece = chessPieceClicked;
     }
 
     /**
      * @return ChessPiece return the currentChessPiece
      */
-    public ChessPiece getCurrentChessPiece() {
-        return currentChessPiece;
+    public ChessPiece getSecondClickedChessPiece() {
+        return secondClickedChessPiece;
     }
 
     /**
      * @param currentChessPiece the currentChessPiece to set
      */
-    public void setCurrentChessPiece(ChessPiece currentChessPiece) {
-        this.currentChessPiece = currentChessPiece;
+    public void setSecondClickedChessPiece(ChessPiece currentChessPiece) {
+        this.secondClickedChessPiece = currentChessPiece;
     }
 
     /**
