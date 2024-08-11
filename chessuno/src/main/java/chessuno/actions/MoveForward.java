@@ -1,6 +1,7 @@
 package chessuno.actions;
 
 import chessuno.Color;
+import chessuno.chessPieces.ChessPieceManager;
 import chessuno.uiContainer.ChessBoardContainer;
 import javafx.scene.layout.GridPane;
 
@@ -27,8 +28,21 @@ public class MoveForward extends MoveAction {
 
             // if the second click is a chess piece, remove the image view
             if ( isClickedChessPiece()== true ) {
+                //System.out.println("\nMoveForward killed a piece, before black list size " + ChessPieceManager.getInstance().getBlackChessPieceList().size());
+                //System.out.println("\nMoveForward killed a piece, before white list size " + ChessPieceManager.getInstance().getWhiteChessPieceList().size());
 
+                // remove all the data about the second clicked chess piece
+                // remove the second piece clicked chess piece
+                ChessPieceManager.getInstance().deleteSpecificChessPiece( getSecondClickedChessPiece().getColor(), getSecondClickedChessPiece() );
+
+                // remove the UI
                 chessGridPane.getChildren().remove( getSecondClickedChessPiece().getImageView() );
+
+
+                //System.out.println("\nMoveForward killed a piece, after black list size " + ChessPieceManager.getInstance().getBlackChessPieceList().size());
+                //System.out.println("\nMoveForward killed a piece, after white list size " + ChessPieceManager.getInstance().getWhiteChessPieceList().size());
+
+
 
                 // remove the first piece clicked chess piece
                 chessGridPane.getChildren().remove( getFirstClickedChessPiece().getImageView() );

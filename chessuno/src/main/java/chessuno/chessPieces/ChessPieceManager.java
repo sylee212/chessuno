@@ -170,6 +170,16 @@ public class ChessPieceManager {
         return true;
     }
 
+    public boolean deleteSpecificChessPiece( Color color, ChessPiece chessPiece ) {
+        // remove the chess piece based on the color
+        if ( color == Color.BLACK ) {
+            getBlackChessPieceList().remove(chessPiece);
+        } else {
+            getWhiteChessPieceList().remove(chessPiece);
+        }
+        return true;
+    }
+
 
 
 
